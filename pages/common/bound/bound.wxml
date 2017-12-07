@@ -1,0 +1,19 @@
+<view class="bound-container">
+    <image  class="bound-container-img" src="../../../res/images/home/bound.png" ></image>
+    <view class="bound-container-body">
+        <view class="bound-container-body-title">
+            <text>身份绑定</text>
+        </view>
+        <view class="input-wrap">
+            <image class="input-tip-img" src="../../../res/images/home/account.png" mode="center"></image>
+            <input bindinput='handleAccontInput' class="bound-input"  type="number" placeholder="请输入您的一卡通账号"  />
+        </view>
+        <view class="input-wrap">
+            <image class="input-tip-img" src="../../../res/images/home/password.png" mode="center"></image>
+            <input bindinput='handlePasswordInput' class="bound-input"  type="text" password placeholder="请输入密码"  />
+        </view>
+        <view>
+            <text bindtap="handleConfirm" class="boud-btn-confirm">确认绑定</text>
+        </view>
+    </view>
+</view>

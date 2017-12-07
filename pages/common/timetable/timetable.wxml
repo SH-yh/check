@@ -1,0 +1,54 @@
+<view class="timetable-container">
+    <view class="timeable-left">
+        <view class="timeable-left-wrap">
+            <block wx:for="{{count}}" wx:key="{{index}}" >
+                <text wx:if="{{item==''}}" class="timeable-count-first timeable-wrap-title">*</text>
+                <text wx:else class="timeable-count" >{{item}}</text>
+            </block>
+        </view>
+    </view>
+    <view class="timeable-right">
+        <view class="timeable-right-wrap">
+            <view wx:for="{{week}}" wx:key="{{i}}" wx:for-index="i" class="timeable-week">
+                <view class="timeable-week-content">
+                    <view class="timeable-wrap-title">{{item}}</view>
+                    <view class="timeable-wrap-clourse">
+                        <block wx:for="{{[1,2,3,4,5,6,7,8,9,10,11]}}" wx:for-index="j" wx:for-item="it" wx:key="{{j}}">
+                            <block wx:if="{{course[i+1]}}">
+                                <block wx:for="{{course[i+1]}}" wx:key="{{idx}}" wx:for-index="idx">   
+                                    <!--如果等于某课程的start-->     
+                                    <block wx:if="{{course[i+1][idx]['start'] == it}}">
+                                        <block wx:if="{{course[i+1][idx]['gap'] == 1}}"><!--两节课-->
+                                            <view class="timeable-wrap-clourse-content-one"></view>
+                                        </block>
+                                        <block wx:if="{{course[i+1][idx]['gap'] == 2}}"><!--两节课-->
+                                            <view class="timeable-wrap-clourse-content-two effects" 
+                                            style="background:{{course[i+1][idx].color}}">
+                                                <text>{{course[i+1][idx]['course']}}({{course[i+1][idx]['room']}})</text>
+                                            </view>
+                                        </block>
+                                        <block wx:elif="{{course[i+1][idx]['gap'] == 3}}"><!--三节课-->
+                                            <view class="timeable-wrap-clourse-content-three effects"
+                                            style="background:{{course[i+1][idx].color}}">
+                                                <text>{{course[i+1][idx]['course']}}({{course[i+1][idx]['room']}})</text>
+                                            </view>
+                                        </block>
+                                         <block wx:elif="{{course[i+1][idx]['gap'] == 4}}"><!--四节课-->
+                                            <view class="timeable-wrap-clourse-content-four  effects" 
+                                            style="background:{{course[i+1][idx].color}}">
+                                                <text>{{course[i+1][idx]['course']}}({{course[i+1][idx]['room']}})</text>
+                                            </view>
+                                        </block>
+                                    </block>
+                                </block>
+                            </block>
+                            <block wx:else>
+                                 <view class="timeable-wrap-clourse-content-one"></view>
+                            </block>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

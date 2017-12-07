@@ -1,0 +1,3 @@
+<template  name="studentCheck">
+    <map class="check-map" scale="18" controls="{{controls}}" show-location longitude="{{longitude}}" latitude="{{latitude}}" bindcontroltap="handleCheck" style="height:{{mapHeight}}px"></map>
+</template>

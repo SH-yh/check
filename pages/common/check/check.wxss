@@ -1,0 +1,8 @@
+.check-container{
+    position:relative;
+    background:#F9F9F9;
+}
+.check-map{
+    width:100%;
+    height:100%;
+}

@@ -1,13 +1,13 @@
 {
   "pages":[
-    "pages/index/index",
-    "pages/person/person",
-    "pages/timetable/timetable",
-    "pages/recordcase/recordcase",
-    "pages/record/record",
-    "pages/ask/ask",
-    "pages/check/check",
-    "pages/bound/bound"
+    "pages/common/index/index",
+    "pages/common/bound/bound",
+    "pages/common/person/person",
+    "pages/common/timetable/timetable",
+    "pages/common/check/check",
+    "pages/student/recordcase/recordcase",
+    "pages/student/record/record",
+    "pages/student/ask/ask"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -23,19 +23,19 @@
     "borderStyle":"white",
     "list":[
         {
-          "pagePath":"pages/index/index",
+          "pagePath":"pages/common/index/index",
           "iconPath":"./res/tabbarsimg/timetable_checkoff.png",
           "selectedIconPath":"./res/tabbarsimg/timetable_checkon.png",
           "text":"首页"
         },
         {
-          "pagePath": "pages/check/check",
+          "pagePath": "pages/common/check/check",
           "iconPath": "./res/tabbarsimg/checkin_off.png",
           "selectedIconPath": "./res/tabbarsimg/checkin_on.png",
           "text":"签到"
         }, 
         {
-         "pagePath":"pages/person/person",
+         "pagePath":"pages/common/person/person",
           "iconPath": "./res/tabbarsimg/record_off.png",
           "selectedIconPath": "./res/tabbarsimg/record_on.png",
           "text":"我的"

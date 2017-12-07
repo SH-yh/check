@@ -1,0 +1,9 @@
+<view class="ask-container">
+    <view class="ask-display">
+        <image src="{{askSrc}}" mode='aspectFit'></image>
+    </view>
+    <view class="ask-btn-wrap">
+        <text bindtap="handleAskBtn" class="ask-btn-up">{{btnState}}</text>
+    </view>
+    
+</view>

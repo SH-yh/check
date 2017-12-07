@@ -1,0 +1,44 @@
+.user-warp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:24px;
+    padding-bottom:24px;
+    background:#B5627E;
+    color:#FFF;
+}
+.userinfo-avatar {
+    width:96px;
+    height:96px;
+    border-radius: 50%;
+}
+.userinfo-nickName {
+    margin-top:18px;
+    margin-bottom: 10px;
+}
+.function-list-wrap{
+    display: flex;
+    flex-direction: row;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+.item-icon {
+    width:32px;
+    height:32px;
+}
+.function-list-item{
+    flex:1;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-bottom:1px solid #BEBEBE;
+    border-right:1px solid #BEBEBE;
+}
+.function-list-item-wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.function-list-item:nth-child(3n){
+    border-right-width:0;
+}

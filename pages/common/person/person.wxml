@@ -1,0 +1,17 @@
+<import src="../../student/person/person.wxml"/>
+<view class="person-container">
+    <view class="user-warp">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickName">{{userInfo.nickName}}</text>
+    </view>
+    <view class="function-list">
+        <view class="function-list-wrap">
+            <block wx:if="{{boundType == 1}}">
+                <template is="student-person" data="{{teacherFunction}}"/>
+            </block>
+            <block wx:elif="{{boundType == -1}}">
+                <template is="student-person" data="{{studentFunction}}"/>
+            </block>
+        </view>
+    </view>
+</view>

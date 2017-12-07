@@ -1,0 +1,41 @@
+.bound-container{
+    width:100%;
+}
+.bound-container-body {
+    width:80%;
+    margin:0 auto;
+    margin-top:20px;
+}
+.bound-container-img{
+    width:100%;
+}
+.bound-container-body-title {
+    color: #B4617D;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+.input-wrap{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom:1px solid #bebebe;
+    padding-top:6px;
+    padding-bottom:6px;
+}
+.input-tip-img{
+    width:32px;
+    height:32px;
+}
+.boud-btn-confirm {
+    display: block;
+    width:90%;
+    padding-top:8px;
+    padding-bottom:8px;
+    background:#B4617D;
+    color:#fff;
+    border-radius: 30px;
+    margin:0 auto;
+    margin-top:20px;
+    text-align: center;
+}
