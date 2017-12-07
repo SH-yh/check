@@ -1,0 +1,4 @@
+.container{
+  font :normal 500 16px '微软雅黑','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  height: 100%;
+}

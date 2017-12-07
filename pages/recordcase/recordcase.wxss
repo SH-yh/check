@@ -1,0 +1,25 @@
+.recordcase-header,.recordcase-body-wrap{
+    display: flex;
+}
+.recordcase-header {
+    flex-direction: row;
+    text-align: center;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.recordcase-body-wrap {
+    flex-direction: row;
+    font-size:14px;
+    text-align: center;
+    align-items: center;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.recordcase-body-wrap:nth-child(odd){
+    background:#B5627E;
+    color:#fff;
+}
+.recordcase-item {
+    flex: 1;
+}

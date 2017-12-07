@@ -1,0 +1,26 @@
+<view class="record-container">
+    <view class="record-search">
+        <view class="record-search-wrap">
+            <input class="search-input" type="text" placeholder='请输入您要查询的课程' />
+            <image class = "search-btn" src='../../res/images/record/search.png' mode="cover"></image>
+        </view>
+    </view>
+    <view class="record-content">
+        <block class="record-content-wrap" wx:for="{{checkReaord}}" wx:key="{{index}}">
+            <navigator url="/pages/recordcase/recordcase?id={{checkReaord[index]['id']}}" style="background:{{checkReaord[index].color}}" hover-class="none" class="record-content-item">
+                <view class="record-content-item-wrap">
+                    <text class="record-content-course">课程：{{checkReaord[index]['course']}}</text>
+                    <view class="record-checked-message">
+                        <text class="record-case-item">已签：{{checkReaord[index]['checked']}}</text>
+                        <text class="record-case-item">缺勤：{{checkReaord[index]['unChecked']}}</text>
+                        <text class="record-case-item">请假：{{checkReaord[index]['vacate']}}</text>
+                    </view>
+                    <view class="record-course-message">
+                        <text class="record-case-item">教师：{{checkReaord[index]['teacher']}}</text>
+                        <text class="record-case-item">教室：{{checkReaord[index]['room']}}</text>
+                    </view>
+                </view>
+            </navigator>
+        </block>
+    </view>
+</view>
