@@ -12,8 +12,16 @@ Page({
           method: 'POST'  
       }
       tool.fetchCheckRecord(conf,(data)=>{
-          tool.addColor(data);
-          this.setData({checkReaord : data});
+        tool.addColor(data);
+        wx.getSystemInfo({
+            success: (res) => {
+                this.setData({
+                    scrollHeight: res.windowHeight - 120,
+                    recordCase: data,
+                    checkReaord: data
+                });
+            }
+        })
       });
   },
   onReady: function () {
