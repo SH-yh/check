@@ -46,7 +46,8 @@ exports.fetchCourse = (callback)=>{
 exports.boundIdentity = (query, callback)=>{
     const data = {
         ok:1,
-        boundMark: 1
+        boundMark: 1,
+        boundType: "1",
     }
     if (callback){
         callback(data);

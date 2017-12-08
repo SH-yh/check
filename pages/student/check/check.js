@@ -17,7 +17,7 @@ exports.getStudentLoaction = (callback)=>{
                                 iconPath: '/res/images/check/check.png',
                                 position: {
                                     left: windowWidth / 2 - 32,
-                                    top: windowHeight - 100,
+                                    top: windowHeight - 140,
                                     width: 64,
                                     height: 64
                                 },

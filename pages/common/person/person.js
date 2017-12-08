@@ -3,7 +3,7 @@ const app = getApp();
 Page({
   data: {
     userInfo: null,
-    boundType: app.boundType,
+    boundType: "",
     tip:3,
     studentFunction: [
         {
@@ -46,16 +46,23 @@ Page({
   },
 
   onLoad(options) {
+      console.log(app);
       const self = this;
       wx.getSetting({
           success: (res) => {
               if (res.authSetting['scope.userInfo']){
                   tool.getUserInfo((userInfo)=>{
-                      self.setData({userInfo: userInfo});
+                      self.setData({
+                          userInfo: userInfo,
+                          boundType: app.boundType
+                        });
                   })
               }else{
                   tool.getUserInfo((userInfo) => {
-                      self.setData({ userInfo: userInfo });
+                      self.setData({ 
+                          userInfo: userInfo ,
+                          boundType: app.boundType
+                          });
                   }) 
               }   
           }

@@ -53,16 +53,15 @@ Page({
         if(length == 5 || length == 11){
             tool.boundIdentity("", (res)=>{
                 if(res.ok){
-                    //app.boundMark = res.boundMark;
-                    if(length == 5){
-                        boundMark = 1;
-                    } else if(length == 5){
-                        boundMark = -1;
+                    app.boundMark = res.boundMark;
+                    //app.boundType = res.boundType;
+                    if (length == 5){
+                        app.boundType = 1;
+                    } else if (length == 11){
+                        app.boundType = -1;
                     }
-                    app.boundMark = boundMark;
-                    // url: `/pages/index/index?boundMark=${res.boundMark}`,
                     wx.switchTab({
-                        url: `/pages/index/index?boundMark=${boundMark}`,
+                        url: '/pages/common/index/index',
                     })
                 }else{
                     wx.showToast({
