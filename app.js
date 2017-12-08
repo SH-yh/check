@@ -15,8 +15,8 @@ App({
       });
       function fetchIdentity(conf, callback) {
           const data = {
-              boundMark:1,
-              boundType:'-1'
+              boundMark:0,
+              boundType:''
           };//1为老师 -1 为学生 0 是没有绑定
           if (callback) {
               callback(data);

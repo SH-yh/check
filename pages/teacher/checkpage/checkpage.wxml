@@ -1,0 +1,21 @@
+<import  src="../../student/check/check"/>
+<view class="teacher-checkpage-container">
+    <block wx:if="{{checkWay=='random'}}">
+        <view class="check-random-title">
+            <text>口令</text>
+        </view>
+        <view class="check-random">
+            <block wx:for="{{random}}" wx:for-item="number" wx:key="{{index}}" >
+                <text class="random-number">{{number}}</text>
+            </block>
+        </view>
+    </block>
+    <block wx:elif="{{checkWay=='gps'}}">
+        <view class="check-gps">
+            <map class="check-map" scale="18" show-location longitude="{{mapConf.longitude}}" latitude="{{mapConf.latitude}}"  style="height:{{mapConf.mapHeight-70}}px"></map>
+        </view>
+    </block>
+    <view class="check-case">
+        <text>{{checkedNum}}</text>/<text>{{sum}}</text>
+    </view>
+</view>

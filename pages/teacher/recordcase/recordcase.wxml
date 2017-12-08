@@ -1,0 +1,24 @@
+<import src="../../common/search/search.wxml" />
+<view class="teacher-recordcase-container">
+    <template is="search" data="{{placeholder:'请输入您要查询的学生'}}" />
+    <view class="teacher-recordcase-header">
+            <text class="recordcase-case-item student-id">学号</text>
+            <text class="recordcase-case-item ">姓名</text>
+            <text class="recordcase-case-item">签到</text>
+            <text class="recordcase-case-item">缺勤</text>
+            <text class="recordcase-case-item">请假</text>
+     </view>
+    <scroll-view scroll-y scroll-with-animation style="height:{{scrollHeight}}px" class="teacher-recordcas-wrap">
+        <view class="teacher-recordcase-body">
+            <block wx:for="{{recordCase}}" wx:for-item="stCase" wx:key="{{index}}">
+                <view class="recordcase-item">
+                    <text class="recordcase-case-item student-id font-size">{{stCase.studentId}}</text>
+                    <text class="recordcase-case-item font-size">{{stCase.name}}</text>
+                    <text class="recordcase-case-item font-size">{{stCase.checked}}</text>
+                    <text class="recordcase-case-item font-size">{{stCase.absence}}</text>
+                    <text class="recordcase-case-item font-size">{{stCase.ask}}</text>
+                </view>
+            </block>
+        </view>
+    </scroll-view>
+</view>

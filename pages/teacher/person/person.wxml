@@ -1,0 +1,13 @@
+<template name="teacher-person">
+    <block wx:for="{{teacherFunction}}" wx:for-item="fn" wx:key="{{index}}">
+        <navigator class="function-list-item" hover-class="none" hover-class="none"  url="{{fn.url}}" >
+            <view class="function-list-item-wrap teacher-fn-wrap">
+                <image class="item-icon" src="{{fn.iconPath}}"  mode="cover"></image>
+                <text>{{fn.name}}</text>
+                <block wx:if="{{fn.tip}}">
+                     <view class="teacher-fn-tip">{{fn.tip}}</view>
+                </block>
+            </view>
+        </navigator>
+    </block>
+</template>

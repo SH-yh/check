@@ -1,0 +1,33 @@
+
+.record-content-item {
+    display: block;
+    margin:20px 20rpx;
+    padding:10px 0;
+    color:#fff;
+    font-size: 18px;
+}
+.record-content-item-wrap {
+    margin-left:20rpx;
+    margin-right: 20rpx;
+}
+.record-content-course{
+    display: block;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size:20px;
+}
+.record-content-case {
+    padding-top:20px;
+    padding-bottom:20px;
+}
+.record-case-item{
+  margin-right:20rpx;
+}
+.record-course-message,.record-checked-message {
+    padding-top:10px;
+    padding-bottom:10px;
+    text-align: right;
+}
+.record-checked-message {
+    text-align: center;
+}

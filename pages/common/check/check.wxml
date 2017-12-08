@@ -1,9 +1,10 @@
 <import  src="../../student/check/check"/>
+<import  src="../../teacher/check/check"/>
 <view class="check-container">
     <block wx:if="{{boundType == -1}}">
         <template is="studentCheck" data="{{...studentConf}}"/>
     </block>
     <block wx:if="{{boundType == 1}}">
-       
+       <template is="teacherCheck"/>
     </block>
 </view>

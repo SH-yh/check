@@ -1,0 +1,9 @@
+.check-way-item {
+    width:80%;
+    padding-top:30px;
+    padding-bottom:30px;
+    background:#B4617D;
+    color:#fff;
+    text-align: center;
+    margin:20px auto;
+}

@@ -1,0 +1,31 @@
+.ask-item-wrap{
+    position:relative;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.item-data{
+    margin-left:10rpx;
+}
+.item-name{
+    position: absolute;
+    right:20px;
+}
+.ask-list-wrap{
+    width:80%;
+    margin:20px auto;
+    background:#F8FDFD;
+    color:#333;
+}
+.ask-handleBnt{
+    padding-top:10px;
+    padding-bottom:10px;
+    text-align: right;
+}
+.ask-btn{
+    padding:8px 10px;
+    background:#B4617D;
+    margin-right:10px;
+    color:#fff;
+    font-size: 14px;
+    border-radius: 8px;
+}

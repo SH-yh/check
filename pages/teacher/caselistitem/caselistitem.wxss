@@ -1,0 +1,27 @@
+@import '../../../res/style/search.wxss';
+.teacher-recordcase-header,.recordcase-item {
+    width:100%;
+    display: inline-block;
+    text-align: center;
+}
+.caselistitem-case-item {
+    display: inline-block;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.recordcase-item{
+    font-size: 16px;
+    color:#333;
+}
+.recordcase-item:nth-child(odd){
+    background:#FBFBFC;
+}
+.student-id {
+    width:50%;
+}
+.student-name {
+    width:30%;
+}
+.student-status {
+    width:20%;
+}

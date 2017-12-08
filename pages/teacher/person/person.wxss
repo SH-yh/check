@@ -1,0 +1,16 @@
+.teacher-fn-wrap{
+    position:relative;
+}
+.teacher-fn-tip{
+    position:absolute;
+    width:48rpx;
+    height:48rpx;
+    line-height: 48rpx;
+    top:-10rpx;
+    right:20rpx;
+    font-size:14px;
+    background:#F00;
+    color:#fff;
+    font-weight: 600;
+    border-radius: 50%;
+}

@@ -7,28 +7,4 @@
             </view>
         </navigator>
     </block>
-<!--
-    <view class="function-list">
-        <view class="function-list-wrap">
-            <navigator class="function-list-item" hover-class="none" hover-class="none"  url="/pages/timetable/timetable" >
-                <view class="function-list-item-wrap">
-                    <image class="item-icon" src="../../../res/images/person/course.png"  mode="cover"></image>
-                    <text>课程表</text>
-                </view>
-            </navigator>
-            <navigator url="/pages/record/record" class="function-list-item" hover-class="none">
-                <view class="function-list-item-wrap">
-                    <image class="item-icon" src="../../../res/images/person/check.png" mode="cover"></image>
-                    <text>考勤记录</text>
-                </view>
-            </navigator>
-            <navigator url="/pages/ask/ask" class="function-list-item" hover-class="none">
-                <view class="function-list-item-wrap">
-                    <image class="item-icon" src="../../../res/images/person/ask.png" mode="cover"></image>
-                    <text>请假</text>
-                </view>
-            </navigator>
-        </view>
-    </view>
--->
 </template>

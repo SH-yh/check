@@ -1,0 +1,12 @@
+<template name="teacherCheck">
+<view class="teacher-check-container">
+    <view class="check-way-wrap">
+        <navigator url="/pages/teacher/checkpage/checkpage?way=random" hover-class='none' class="check-way-item">
+             <text>口令签到</text>
+        </navigator> 
+        <navigator url="/pages/teacher/checkpage/checkpage?way=gps" hover-class='none'   class="check-way-item">
+            <text>gps位置签到</text>
+        </navigator>
+    </view>
+</view>
+</template>

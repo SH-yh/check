@@ -1,0 +1,26 @@
+@import '../../../res/style/record.wxss';
+.record-wrap{
+    margin-right:20rpx;
+    margin-left:20rpx;
+}
+.record-content-item{
+    margin-right:0;
+    margin-left:0;
+}
+.record-content-item{
+    margin-bottom:5px;
+}
+.teacher-record-case-wrap {
+    text-align: right;
+}
+.record-case{
+    display: inline-block;
+    padding:6px 12px;
+    background:#DE5899;
+    color:#fff;
+    font-size:14px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-left:10rpx;
+    margin-right:10rpx;
+}

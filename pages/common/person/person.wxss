@@ -1,3 +1,4 @@
+@import '../../teacher/person/person.wxss';
 .user-warp{
     display: flex;
     flex-direction: column;
@@ -17,7 +18,9 @@
     margin-bottom: 10px;
 }
 .function-list-wrap{
+    width:100%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     margin-top:20px;
     margin-bottom: 20px;
@@ -27,7 +30,7 @@
     height:32px;
 }
 .function-list-item{
-    flex:1;
+    width:33%;
     padding-top:10px;
     padding-bottom:10px;
     border-bottom:1px solid #BEBEBE;

@@ -1,3 +1,4 @@
+@import '../../teacher/check/check.wxss';
 .check-container{
     position:relative;
     background:#F9F9F9;

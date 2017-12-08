@@ -1,3 +1,0 @@
-<view class="check-container">
-    <map class="check-map" scale="18" controls="{{controls}}"show-location longitude="{{longitude}}" latitude="{{latitude}}" bindcontroltap="handleCheck" style="height:{{mapHeight}}px"></map>
-</view>

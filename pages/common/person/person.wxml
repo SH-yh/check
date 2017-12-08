@@ -1,13 +1,14 @@
 <import src="../../student/person/person.wxml"/>
+<import src="../../teacher/person/person.wxml"/>
 <view class="person-container">
     <view class="user-warp">
         <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <text class="userinfo-nickName">{{userInfo.nickName}}</text>
+        <text class="userinfo-nickName"><block wx:if="{{boundType==-1}}">学生</block><block wx:elif="{{boundType==1}}">老师</block>：{{userInfo.nickName}}</text>
     </view>
     <view class="function-list">
         <view class="function-list-wrap">
             <block wx:if="{{boundType == 1}}">
-                <template is="student-person" data="{{teacherFunction}}"/>
+                <template is="teacher-person" data="{{teacherFunction}}"/>
             </block>
             <block wx:elif="{{boundType == -1}}">
                 <template is="student-person" data="{{studentFunction}}"/>

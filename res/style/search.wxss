@@ -1,4 +1,3 @@
-@import '../../../res/style/record.wxss';
 .record-search{
     width:100%;
     background:#F5F5F5;

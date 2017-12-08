@@ -1,0 +1,13 @@
+.caselist-wrap{
+    color:#333;
+    margin:10px 20rpx;
+    background:#F6F8F8;
+}
+.list-course{
+    display: inline-block;
+    padding:10px 20rpx;
+}
+.record-time {
+    text-align: right;
+    padding:10px 20rpx;
+}

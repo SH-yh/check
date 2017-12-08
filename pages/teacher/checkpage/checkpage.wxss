@@ -1,0 +1,30 @@
+.check-random-title{
+    font-size:24px;
+    text-align: center;
+    color:#B4617D;
+    padding:10px 0;
+}
+.check-random{
+    width:80%;
+    margin:0 auto;
+}
+.random-number{
+    display: inline-block;
+    width:24%;
+    padding-top:20px;
+    padding-bottom:20px;
+    border-right:1px solid #ddd;
+    background:#F8F8F8;
+    text-align: center;
+}
+.random-number:last-child{
+    border-right-width:0;
+}
+.check-case{
+    padding-top:20px;
+    padding-bottom:20px;
+    text-align: center;
+}
+.check-map{
+    width:100%;
+}

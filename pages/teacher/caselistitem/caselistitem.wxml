@@ -1,0 +1,23 @@
+<import src="../../common/search/search.wxml"/>
+<view class="teacher-caselistitem-container">
+    <template is="search" data="{{placeholder:'请输入要查询的学生学号'}}" />
+    <view class="teacher-recordcase-header">
+            <text class="caselistitem-case-item student-id">学号</text>
+            <text class="caselistitem-case-item student-name">姓名</text>
+            <text class="caselistitem-case-item student-status">状态</text>
+     </view>
+    <scroll-view scroll-y scroll-with-animation style="height:{{scrollHeight}}px" class="teacher-caselistitem-wrap">
+        <view class="teacher-caselistitem-body">
+            <block wx:for="{{recordCase}}" wx:for-item="stCase" wx:for-index="id" wx:key="{{stCase.studentId}}">
+                <view class="recordcase-item">
+                    <text class="caselistitem-case-item student-id font-size">{{stCase.studentId}}</text>
+                    <text class="caselistitem-case-item font-size student-name">{{stCase.name}}</text>
+                   
+                        <picker mode="selector"  range = "{{status}}" value="{{stCase.status}}" class="caselistitem-case-item font-size student-status" id="{{stCase.studentId}}" bindchange="bindPickerChange">
+                            <view>{{status[stCase.status]}}</view>
+                        </picker>
+                </view>
+            </block>
+        </view>
+    </scroll-view>
+</view>

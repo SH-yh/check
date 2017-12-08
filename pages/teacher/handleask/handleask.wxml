@@ -1,0 +1,14 @@
+<view class="teacher-handleask-container">
+    <block wx:for="{{askList}}" wx:for-item="ask" wx:key="{{index}}">
+        <view class="ask-list-wrap">
+            <view class="ask-item-wrap">
+                <text class="item-data">{{ask.data}}</text>
+                <text class="item-name">{{ask.name}}</text>
+            </view>
+            <view class="ask-handleBnt">
+                <text class="ask-btn" data-id="{{ask.id}}" bindtap='handleLook'>查看假条</text>
+                <text class="ask-btn" data-id="{{ask.id}}" bindtap='handleAsk'>批准</text>
+            </view>
+        </view>
+    </block>
+</view>
