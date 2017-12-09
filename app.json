@@ -1,8 +1,6 @@
 {
   "pages":[
-
     "pages/common/index/index",
-    "pages/teacher/handleask/handleask",
     "pages/common/bound/bound",
     "pages/common/person/person",
     "pages/common/timetable/timetable",
@@ -13,6 +11,7 @@
     "pages/teacher/recordcase/recordcase",
     "pages/teacher/recordcaselist/recordcaselist",
     "pages/teacher/caselistitem/caselistitem",
+    "pages/teacher/handleask/handleask",
     "pages/student/recordcase/recordcase",
     "pages/student/record/record",
     "pages/student/ask/ask"

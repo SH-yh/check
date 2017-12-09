@@ -29,3 +29,6 @@
     font-size: 14px;
     border-radius: 8px;
 }
+.ask-btn-picker{
+    display: inline-block;
+}

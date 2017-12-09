@@ -6,11 +6,12 @@ App({
         url : 'https//www.check.qianyanxu.com/check/identity'
     }
     fetchIdentity(conf, (data)=>{
-        if (!data.boundType){
+        if (!data.boundMark){
             wx.redirectTo({
                 url: '/pages/common/bound/bound',
             })
         }else{
+            self.boundMark = data.boundMark;
             self.boundType = data.boundType;
         }
     });

@@ -14,7 +14,7 @@
                     <text class="caselistitem-case-item font-size student-name">{{stCase.name}}</text>
                    
                         <picker mode="selector"  range = "{{status}}" value="{{stCase.status}}" class="caselistitem-case-item font-size student-status" id="{{stCase.studentId}}" bindchange="bindPickerChange">
-                            <view>{{status[stCase.status]}}</view>
+                            <view style="color:{{stCase.color}}">{{status[stCase.status]}}</view>
                         </picker>
                 </view>
             </block>

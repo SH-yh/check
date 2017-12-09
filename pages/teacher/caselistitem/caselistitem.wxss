@@ -25,3 +25,10 @@
 .student-status {
     width:20%;
 }
+.ask-handleBnt{
+    display: flex;
+    flex-direction: row;
+}
+.ask-btn-picker{
+    width:50px;
+}

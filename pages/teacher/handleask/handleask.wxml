@@ -7,7 +7,9 @@
             </view>
             <view class="ask-handleBnt">
                 <text class="ask-btn" data-id="{{ask.id}}" bindtap='handleLook'>查看假条</text>
-                <text class="ask-btn" data-id="{{ask.id}}" bindtap='handleAsk'>批准</text>
+                <picker  mode="selector" data-id="{{ask.id}}" range='{{handleType}}' bindchange ="handleAsk" class="ask-btn-picker"  >
+                    <text class="ask-btn">批复</text>
+                </picker>
             </view>
         </view>
     </block>

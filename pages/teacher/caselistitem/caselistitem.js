@@ -41,7 +41,7 @@ Page({
           },
           {
               "name": '瓦萨',
-              "studentId": '20141475785',
+              "studentId": '20141475753',
               "status": 2,
           },
           {
@@ -61,12 +61,12 @@ Page({
           },
           {
               "name": '违法',
-              "studentId": '20141475784',
+              "studentId": '20141475982',
               "status": 1,
           },
           {
               "name": '违法',
-              "studentId": '20141475984',
+              "studentId": '20141475129',
               "status": 1,
           }
       ]
@@ -114,6 +114,9 @@ Page({
         const newData = target.map((item, index)=>{
             if (item.studentId == value){
                 item.status = e.detail.value;
+                if(!item.color){
+                    item.color = "#f00";
+                } 
                 if (arr.length == 0){
                     arr.push(item);
                 }else{
