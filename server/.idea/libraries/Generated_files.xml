@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/dist/routes/teacher.js" />
+      <root url="file://$PROJECT_DIR$/dist/model/db.js" />
+      <root url="file://$PROJECT_DIR$/dist/controller/contorl.js" />
+      <root url="file://$PROJECT_DIR$/dist/routes/teacher.js" />
+      <root url="file://$PROJECT_DIR$/dist/model/db.js" />
+      <root url="file://$PROJECT_DIR$/dist/bin/www.js" />
+      <root url="file://$PROJECT_DIR$/dist/controller/contorl.js" />
+      <root url="file://$PROJECT_DIR$/dist/app.js" />
+      <root url="file://$PROJECT_DIR$/dist/bin/www.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
