@@ -354,3 +354,15 @@ exports.addColor = (data) => {
         item.color = assit.randomColor();
     }
 }
+exports.searchSomething = (obj, data) =>{
+    let target = [];
+    const length = data.length;
+    for(let i = 0; i < length; i++){
+        const item = data[i];
+        if (item[obj.key] == obj.value) {
+            target.push(item);
+            return target;
+        }
+    }
+    return false;
+}

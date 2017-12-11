@@ -1,8 +1,8 @@
 <template name="search">
     <view class="record-search">
         <view class="record-search-wrap">
-            <input class="search-input" type="text" placeholder='{{placeholder}}' />
-            <image class = "search-btn" src='../../../res/images/record/search.png' mode="cover"></image>
+            <input class="search-input" bindinput='handleQuery' type="text" placeholder='{{placeholder}}' />
+            <image class = "search-btn" bindtap='handleSeacher' src='../../../res/images/record/search.png' mode="cover"></image>
         </view>
     </view>
 </template>

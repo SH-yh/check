@@ -1,6 +1,6 @@
 <import src="../../common/search/search.wxml" />
 <view class="teacher-recordcase-container">
-    <template is="search" data="{{placeholder:'请输入您要查询的学生'}}" />
+    <template is="search" data="{{placeholder:'请输入您要查询的学生学号'}}" />
     <view class="teacher-recordcase-header">
             <text class="recordcase-case-item student-id">学号</text>
             <text class="recordcase-case-item ">姓名</text>

@@ -45,37 +45,33 @@ Page({
     ]
   },
 
-  onLoad(options) {
-      console.log(app);
-      const self = this;
-      wx.getSetting({
-          success: (res) => {
-              if (res.authSetting['scope.userInfo']){
-                  tool.getUserInfo((userInfo)=>{
-                      self.setData({
-                          userInfo: userInfo,
-                          boundType: app.boundType
-                        });
-                  })
-              }else{
-                  tool.getUserInfo((userInfo) => {
-                      self.setData({ 
-                          userInfo: userInfo ,
-                          boundType: app.boundType
-                          });
-                  }) 
-              }   
-          }
-      });
-      
-  },
-  onReady(){
+    onLoad(options) {
+        const self = this;
+        this.setData({
+            userInfo: app.userInfo,
+            boundType: app.boundType
+        });
+        if (wx.getStorageSync('userInfo')) {//如果本地已经保存了用户的信息
+            wx.getSetting({
+                success: (res) => {
+                    tool.getUserInfo((userInfo) => {
+                        const nickName = userInfo.nickName;
+                        const localNickName = wx.getStorageSync('userInfo').nickName;
+                        if (nickName != localNickName){
+                            wx.setStorageSync('userInfo', userInfo);
+                            self.setData({
+                                userInfo: userInfo
+                            });
+                        }
+                    })
+                }
+            });
+        }
+    },
+    onReady(){
     
-  },
+    },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
   
   },

@@ -1,3 +1,4 @@
+const tool = require('../../../res/third/tool.js');
 Page({
   data: {
     recordCase:null,
@@ -125,5 +126,19 @@ Page({
   },
   onShareAppMessage: function () {
   
+  },
+  handleQuery(e) {
+      this.queryValue = e.detail.value;
+  },
+  handleSeacher() {
+      const recordCase = this.data.recordCase;
+      const result = tool.searchSomething({
+          key: 'studentId',
+          value: this.queryValue
+      }, recordCase);
+      result ? this.setData({ recordCase: result }) : wx.showToast({
+          title: '无此学生',
+          duration: 2000
+      })
   }
 })
