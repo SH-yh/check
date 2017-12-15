@@ -4,11 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const debug = require('debug')('checkserver:server');
 const https = require('https');
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
-let options = {
-    key: fs.readFileSync('../privateKey/private.pem', 'utf8'),
-    cert: fs.readFileSync('../privateKey/file.crt', 'utf8')
+var options = {
+    key: fs.readFileSync('../privateKey/2_check.qianyanxu.com.key', 'utf8'),
+    cert: fs.readFileSync('../privateKey/1_check.qianyanxu.com_bundle.crt', 'utf8')
 };
 var server = https.createServer(options, app);
 

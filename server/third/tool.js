@@ -1,3 +1,5 @@
+"use strict";
+const fs = require("fs");
 const assist = require('./assist');
 exports.getTodayCourse = (week, data)=>{
     const todayCourse = data.filter((item)=>{
@@ -53,4 +55,41 @@ exports.tidyCourse = (course) => {
     });
     assist.fillCourse(tidCourse);
     return tidCourse;
+};
+exports.removedSomeKey = (key, data)=>{
+    const record = Array.isArray(data) && data.map((item)=>{
+        if(item[key]){
+            delete item[key];
+        }
+        return item;
+    });
+    return record;
+};
+exports.getSomeKey = (key, data)=>{
+    const result = Array.isArray(data) && data.map((item)=>{
+            if(item[key]){
+                return item[key];
+            }
+            return item;
+        });
+    return result;
+};
+exports.getSomeValue = (key, value, data)=>{
+    const result = Array.isArray(data) && data.filter((item)=>{
+            return item[key] == value ? true : false;
+        });
+    return result;
+};
+//获取当天日期
+exports.getDate = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    const week = `星期${assist.convertDate(date.getDay())}`;
+    const now = `${year}年${month}月${day}日`;
+    return {
+        date : now,
+        week : week
+    };
 };

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const studentControl = require('../controller/studentControl');
 
-//学生所有课程总的考勤记录，有single标记
+//学生所有课程总的考勤记录
 router.post('/course/checkrecord', (req, res, next)=>{
     studentControl.checkrecord(req, res, next);
 });
@@ -11,7 +11,7 @@ router.post('/course/singlerecord', (req, res, next)=>{
     studentControl.singleRecord(req, res, next);
 });
 //学生请假
-router.post('', (req, res, next) => {
+router.post('/ask', (req, res, next) => {
     studentControl.ask(req, res, next)
 });
 

@@ -35,3 +35,11 @@ exports.getSomething = (collectionName, query, assign, cb) => {
         });
     });
 };
+//更新数据库中某些内容
+exports.updateSomething = (collectionName, query, set, cb)=>{
+    _connecteMongo((db)=>{
+        db.collection(collectionName).updateOne(query, set, (err, res)=>{
+            typeof cb == "function" && cb(err, res.result);
+        })
+    })
+};

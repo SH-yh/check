@@ -22,7 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/student', student);
 app.use('/teacher', teacher);
 app.use('/base', base);
-
+app.get("/", (req, res, next)=>{
+  res.end("hello hy");
+});
 // 404捕捉
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

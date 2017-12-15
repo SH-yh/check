@@ -1,3 +1,4 @@
+'use strict';
 const db = require('../model/db');
 const request = require('request');
 const tool = require("../third/tool");
@@ -14,7 +15,7 @@ const fetchOpenId = (JS_code, cb) =>{
     })
 
 };
-exports.isBound = (req, res, next) => {
+exports.isBound = (req, response, next) => {
     const JS_code = req.body.code;
     fetchOpenId(JS_code, (wxInfo)=>{
         const openId =  wxInfo.openid;
@@ -22,24 +23,24 @@ exports.isBound = (req, res, next) => {
             openId:openId
         };
         db.getBoundMark("teacher", query, (result) => {
-            result ?
-                res.json({"openId":openId, "boundMark":1, "boundType":1}) :
+            if(result){//在老师处发现绑定信息
+                response.json({"openId":openId, "boundMark":1, "boundType":1})
+            }else{//在学生处发现绑定信息
                 db.getBoundMark("student", query, (res) => {
-                    res ? res.json({"openId":openId, "boundMark":1, "boundType":-1}) : res.json({"name":1});
+                    if(res){
+                        response.json({"openId":openId, "boundMark":1, "boundType":-1})
+                    }else{//都没发现，就是该用户未绑定
+                        response.json({"openId":openId, "boundMark":0, "boundType":""});
+                    }
                 });
-            res.end();
+            }
         })
     });
 };
 //微信用户与一卡通账户绑定
 exports.bound = (req, res, next) => {
     //拿到用户的openId, 账号，密码和用户类型
-    const {openId, account, password, type} = {
-        openId:"wefvjenkv",
-        account:"201441389090",
-        password:"000000",
-        type:1
-    };
+    const {openId, account, password, type} = req.body;
     //根据用户类别
     const collection = type == 1 ? 'teacher' :'student';
     //构建查询语句
