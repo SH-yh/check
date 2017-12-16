@@ -1,74 +1,154 @@
 {
-  "name": "HY",
-  "studentId":"20144138909",
-  "password": "000000",
-  "major":"计算机科学与技术",
-  "grade":"2014级",
-  "class":"5班",
+  "_id" : ObjectId("5a30d18079781a22ac44c206"),
+  "name" : "HY",
+  "account" : "20144138075",
+  "password" : "000000",
+  "major" : "计算机科学与技术",
+  "grade" : "2014级",
+  "class" : "5班",
   "openId" : "",
-  "boundMark":"",
-  "boundType":"",
-  "course":[
+  "boundMark" : "1",
+  "boundType" : "-1",
+  "courseList" : [
     {
-      "course":"数据结构",
-      "courseId":"0001",
-      "lessonId":"02",
-      "time":"8:00-9:40",
-      "week":"1",
-      "start":"1",
-      "gap":"2",
-      "teacher":"冯国伟",
-      "site":"A6-124"
+      "course" : "数据结构",
+      "courseId" : "0001",
+      "lessonId" : "02",
+      "teacher" : "冯国伟"
     },
     {
-      "course":"离散数学",
-      "courseId":"0002",
-      "lessonId":"01",
-      "time":"10:10-11:50",
-      "week":"1",
-      "start":"1",
-      "gap":"2",
-      "teacher":"冯国伟",
-      "site":"A6-124"
+      "course" : "离散数学",
+      "courseId" : "0002",
+      "lessonId" : "01",
+      "teacher" : "冯国伟"
     },
     {
-      "course":"计算机组成",
-      "courseId":"0003",
-      "lessonId":"01",
-      "time":"14:30-16:10",
-      "week":"4",
-      "start":"1",
-      "gap":"2",
-      "teacher":"冯国伟",
-      "site":"A6-124"
+      "course" : "计算机组成",
+      "courseId" : "0003",
+      "lessonId" : "01",
+      "teacher" : "冯国伟"
     },
     {
-      "course":"毛概",
-      "courseId":"0004",
-      "lessonId":"01",
-      "time":"19:10-21:30",
-      "week":"6",
-      "start":"1",
-      "gap":"3",
-      "teacher":"冯国伟",
-      "site":"A6-124"
+      "course" : "毛概",
+      "courseId" : "0004",
+      "lessonId" : "01",
+      "teacher" : "冯国伟"
     },
     {
-      "course":"创业基础",
-      "courseId":"0005",
-      "lessonId":"01",
-      "time":"10:10-11:50",
-      "week":"7",
-      "start":"1",
-      "gap":"2",
-      "teacher":"冯国伟",
-      "site":"A6-124"
+      "course" : "创业基础",
+      "courseId" : "0005",
+      "lessonId" : "01",
+      "teacher" : "冯国伟"
     }
   ],
-  "check":[
-
+  "course" : [
+    {
+      "course" : "数据结构",
+      "courseId" : "0001",
+      "lessonId" : "02",
+      "time" : "8:00-9:40",
+      "week" : "1",
+      "start" : "1",
+      "gap" : "2",
+      "teacher" : "冯国伟",
+      "site" : "A6-124"
+    },
+    {
+      "course" : "离散数学",
+      "courseId" : "0002",
+      "lessonId" : "01",
+      "time" : "10:10-11:50",
+      "week" : "1",
+      "start" : "1",
+      "gap" : "2",
+      "teacher" : "冯国伟",
+      "site" : "A6-124"
+    },
+    {
+      "course" : "计算机组成",
+      "courseId" : "0003",
+      "lessonId" : "01",
+      "time" : "14:30-16:10",
+      "week" : "4",
+      "start" : "1",
+      "gap" : "2",
+      "teacher" : "冯国伟",
+      "site" : "A6-124"
+    },
+    {
+      "course" : "毛概",
+      "courseId" : "0004",
+      "lessonId" : "01",
+      "time" : "19:10-21:30",
+      "week" : "6",
+      "start" : "1",
+      "gap" : "3",
+      "teacher" : "冯国伟",
+      "site" : "A6-124"
+    },
+    {
+      "course" : "创业基础",
+      "courseId" : "0005",
+      "lessonId" : "01",
+      "time" : "10:10-11:50",
+      "week" : "7",
+      "start" : "2",
+      "gap" : "2",
+      "teacher" : "冯国伟",
+      "site" : "A6-124"
+    }
   ],
-  "ask":[
+  "check" : [
+    {
+      "course" : "数据结构",
+      "teacher" : "冯国伟",
+      "askSum" : NumberInt(0),
+      "checkSum" : NumberInt(2),
+      "unCheckedSum" : NumberInt(0),
+      "checkStatus" : [
+        {
+          "id" : "123654895242x",
+          "date" : "2017年12月11日",
+          "week" : "周一",
+          "index" : "6-7",
+          "checkStatus" : "0"
+        },
+        {
+          "id" : "12365acsf4895242x",
+          "date" : "2017年12月12日",
+          "week" : "周二",
+          "index" : "6-7",
+          "checkStatus" : "0"
+        }
+      ]
+    },
+    {
+      "course" : "创业基础",
+      "teacher" : "冯国伟",
+      "askSum" : NumberInt(0),
+      "checkSum" : NumberInt(2),
+      "unCheckedSum" : NumberInt(0),
+      "checkStatus" : [
+        {
+          "id" : "123654895242x",
+          "date" : "2017年12月11日",
+          "time" : "10:10-11:50",
+          "week" : "7",
+          "index" : "3-4",
+          "checkStatus" : "0"
+        },
+        {
+          "id" : "12365acsf4895242x",
+          "date" : "2017年12月12日",
+          "time" : "10:10-11:50",
+          "week" : "7",
+          "index" : "3-4",
+          "checkStatus" : "0"
+        }
+      ]
+    }
+  ],
+  "ask" : [
 
   ]
 }
