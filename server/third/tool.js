@@ -93,3 +93,11 @@ exports.getDate = () => {
         week : week
     };
 };
+exports.addColor = (data) => {
+    const length = data.length;
+    for (let i = 0; i < length; i++){
+        let item = data[i];
+        item.color = assist.randomColor();
+    }
+    return data;
+};

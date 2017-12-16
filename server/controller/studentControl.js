@@ -92,12 +92,12 @@ exports.ask = (req, res, next)=>{
                     }
                 }
             };
+            console.log(teacherQuery);
            db.updateSomething(collectionName, studentQuery, set, (err, result)=>{
-               if(err || result.n){
-                   res.json({ok:0});
+               if(err || result.n == 0){
                }else if(result){
                     db.updateSomething('teacher', teacherQuery, set, (err, result)=>{
-                        if(err || result.n){
+                        if(err || result.n == 0){
                             res.json({ok:0});
                         }else{
                             res.json({

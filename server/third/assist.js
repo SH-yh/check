@@ -10,7 +10,7 @@ exports.fillCourse = (data) => {
         for (let i = 0; i < target.length; i++) {
             const item = target[i];
             let obj = findStart(target);
-            const index = Number(item.start) + Number(item.gap);
+            const index = (Number(item.start) + Number(item.gap)) + "";
             if (obj.indexOf(index) == -1 && index < 12) {
                 target.splice(i + 1, 0, {
                     "start": index,

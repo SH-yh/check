@@ -4,7 +4,7 @@ const studentControl = require('../controller/studentControl');
 
 //学生所有课程总的考勤记录
 router.post('/course/checkrecord', (req, res, next)=>{
-    studentControl.checkrecord(req, res, next);
+    studentControl.checkRecord(req, res, next);
 });
 //查询单个课程详细的考勤情况
 router.post('/course/singlerecord', (req, res, next)=>{

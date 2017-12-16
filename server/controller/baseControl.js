@@ -56,13 +56,13 @@ exports.bound = (req, res, next) => {
     };
     //进行更新检查
     db.bound(collection,query,set,(result)=>{
-        (result.ok && result.n == 1) ? res.json({"boundMark":1,"boundType":type}) : res.json({"ok":0});
+        (result.ok && result.n == 1) ? res.json({"boundMark":1,"boundType":type,"ok":1}) : res.json({"ok":0});
         res.end();
     } );
 };
 //获取用户当前时间后的两节课程
 exports.course = (req, res, next) => {
-    const {openId,type} = req.body;
+    const {openId,type, mark} = req.body;
     const date = new Date();
     const week = date.getDay().toString();
     const query = {//组装查询条件
@@ -80,15 +80,20 @@ exports.course = (req, res, next) => {
         if(!data){//如果今天没有课
             const tip = {
                 "tip":"休息时间",
-                "wish":"主人您没课了，请尽情吩咐！"
+                "wish":"主人您没课了，请尽情吩咐！",
+                "ok":0
             };
             res.json({course:tip});
         }else{//今天有课
             //获取当天的课程，并将其按时间顺序排列好
             const todayCourse = tool.getTodayCourse(week, data.course);
-            //获取当前时间最接近的两节课
-            const closeTwoCourse = tool.getCloseTwoCourse(todayCourse);
-            res.json({course:closeTwoCourse});
+            if(mark){
+                res.json({course:todayCourse});
+            }else {
+                //获取当前时间最接近的两节课
+                const closeTwoCourse = tool.getCloseTwoCourse(todayCourse);
+                res.json({course:closeTwoCourse});
+            }
         }
         res.end();
     });
@@ -110,5 +115,6 @@ exports.courseTable = (req, res, next) => {
         tidyCourse && res.json({"course":tidyCourse});
     })
 };
+
 //测试
 // courseTable({body:{"openId":"12345",type:1}});
