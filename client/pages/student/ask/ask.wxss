@@ -1,10 +1,31 @@
 .ask-display{
+    position: relative;
     border:1px solid #B5627E;
+    height:280rpx;
     margin:40px 10rpx;
     text-align: center;
 }
 .ask-display-image {
     width:100%;
+}
+.add-image{
+    position: absolute;
+    top:0;bottom:0;
+    left:0;right:0;
+    margin:auto;
+    width:48px;
+}
+.ask-describe{
+    width:90%;
+    margin:0 auto;
+    margin-bottom:10px;
+}
+.ask-course{
+    padding-top:10px;
+    font-size:14px;
+    padding-bottom: 10px;
+    text-indent: 14px;
+    border-bottom:1px solid #333;
 }
 .ask-btn-wrap {
    text-align: center;
@@ -15,4 +36,10 @@
     color:#fff;
     border-radius: 20px;
     font-size:16px;
+}
+.warn {
+    color:#F00;
+    text-align: center;
+    font-size:16px;
+    margin-bottom: 20rpx;
 }

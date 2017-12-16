@@ -8,14 +8,14 @@
                         <text class="record-case-item">年级：{{record['grade']}}{{record['major']}}{{record['class']}}</text>
                     </view>
                     <view class="record-course-message">
-                        <text class="record-case-item">课序号：{{record['lessonNumber']}}</text>
+                        <text class="record-case-item">课序号：{{record['lessonId']}}</text>
                         <text class="record-case-item">考勤：{{record['checkNum']}}次</text>
                     </view>
                 </view>
             </view>
             <view  class="teacher-record-case-wrap">
-            <navigator class="record-case" url="/pages/teacher/recordcaselist/recordcaselist?courseNumber={{record['courseNumber']}}&&lessonNumbe={{record['courseNumber']}}" hover-class="none" >详情</navigator>
-            <navigator class="record-case" url="/pages/teacher/recordcase/recordcase?courseNumber={{record['courseNumber']}}&&lessonNumber={{record['courseNumber']}}" hover-class='none'>概况</navigator>
+            <navigator class="record-case" url="/pages/teacher/recordcaselist/recordcaselist?courseId={{record['courseId']}}&&lessonNumbe={{record['courseId']}}" hover-class="none" >详情</navigator>
+            <navigator class="record-case" url="/pages/teacher/recordcase/recordcase?courseId={{record['courseId']}}&&lessonNumber={{record['courseId']}}" hover-class='none'>概况</navigator>
             </view>
         </view>
     </block>

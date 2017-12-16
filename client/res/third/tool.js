@@ -1,8 +1,9 @@
 const assit = require('./assist.js');
+const app = getApp();
 exports.getDate = () => {
   const date = new Date();
   const year = date.getFullYear();
-  const month = date.getMonth();
+  const month = date.getMonth() + 1;
   const day = date.getDate();
   const week = `星期${assit.convertDate(date.getDay())}`;
   const now = `${year}年${month}月${day}日`;
@@ -43,34 +44,24 @@ exports.fetchCourse = (callback)=>{
     })
     */
 }
-exports.boundIdentity = (query, callback)=>{
-    const data = {
-        ok:1,
-        boundMark: 1,
-        boundType: "1",
-    }
-    if (callback){
-        callback(data);
-    }
-    /*
+//进行绑定
+exports.fetch = (conf, callback)=>{
    wx.request({
-       url: "",
-       method: "POST",
+       url: conf.url,
+       method: conf.method,
        dataType: "json",
-       success: (date) => {
-           if (callback) {
-               callback(date);
-           }
+       data: conf.data,
+       success: (data) => {
+           typeof callback == "function" && callback(data);
        }
    })
-   */
 }
 exports.getUserInfo = (callback)=>{
     wx.login({
         success: res => {
             wx.getUserInfo({
                 success: (res) => {
-                    if (callback){
+                    if (callback) {
                         callback(res.userInfo)
                     }
                 }
@@ -84,43 +75,43 @@ exports.fetchData = (callback) => {
                 {   "course": "数据仓库与数据挖掘",
                     "start": 1,
                     "gap":2,
-                    "room": 'A3-202'
+                    "site": 'A3-202'
                 }, 
                 {
                     "course": "数字图像处理",
                     "start": 3,
                     "gap": 2,
-                    "room": 'A6-302'
+                    "site": 'A6-302'
                 },     
                 {
                     "course": "移动端开发",
                     "start": 9,
                     "gap": 2,
-                    "room": 'A4-305'
+                    "site": 'A4-305'
                 },     
-            ],
-            "2":[
-                {
-                    "course": "计算机图形学",
-                    "start": 7,
-                    "gap": 2,
-                    "room": 'A6-315'
-                }
             ],
             "4":[
                 {
                     "course": "计算机图形学",
+                    "start": 7,
+                    "gap": 2,
+                    "site": 'A6-315'
+                }
+            ],
+            "2":[
+                {
+                    "course": "计算机图形学",
                     "start": 5,
                     "gap": 4,
-                    "room": 'A4-305'
+                    "site": 'A4-305'
                 }
             ],
             "7":[
                 {
                     "course": "就算计图形学",
-                    "start": 3,
-                    "gap": 3,
-                    "room": 'A6-105'
+                    "start": 1,
+                    "gap": 2,
+                    "site": 'A6-105'
                 }
             ]
     }
@@ -148,7 +139,7 @@ exports.fetchCheckRecord = (conf, callback) => {
                 "unChecked": 3,
                 "vacate": 1,
                 "teacher": 'HY',
-                "room": 'A3-202'
+                "site": 'A3-202'
             },
             {
                 "course": "数字图像处理",
@@ -157,7 +148,7 @@ exports.fetchCheckRecord = (conf, callback) => {
                 "unChecked": 3,
                 "vacate": 1,
                 "teacher": 'HY',
-                "room": 'A6-302'
+                "site": 'A6-302'
             },
             {
                 "course": "算法",
@@ -166,7 +157,7 @@ exports.fetchCheckRecord = (conf, callback) => {
                 "unChecked": 3,
                 "vacate": 1,
                 "teacher": 'HY',
-                "room": 'A4-305'
+                "site": 'A4-305'
             },
             {
                 "course": "数据结构",
@@ -175,7 +166,7 @@ exports.fetchCheckRecord = (conf, callback) => {
                 "unChecked": 3,
                 "vacate": 1,
                 "teacher": 'HY',
-                "room": 'A4-305'
+                "site": 'A4-305'
             },
             {
                 "course": "离散",
@@ -184,54 +175,8 @@ exports.fetchCheckRecord = (conf, callback) => {
                 "unChecked": 3,
                 "vacate": 1,
                 "teacher": 'HY',
-                "room": 'A4-305'
+                "site": 'A4-305'
             },
-            /*
-            {
-                "course": "高数",
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "room": 'A4-305'
-            },
-            {
-                "id":78964,
-                "course": "语文",
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "room": 'A4-305'
-            },
-            {
-                "id":5698742,
-                "course": "英语",
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "room": 'A4-305'
-            },
-            {
-                "id":456972,
-                "course": "毛概",
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "room": 'A4-305'
-            },
-            {
-                "id":321456,
-                "course": "思修",
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "room": 'A4-305'
-            },
-            */
         ];
     if (callback) {
         callback(data);
@@ -256,31 +201,31 @@ exports.fetchCheckedMessage = (conf, callback) => {
                 date: "2017年10月1日",
                 week:"周一",
                 index:"6-7",
-                checked:"已签"
+                checkStatus:"0"
             },
             {
                 date: "2017年10月3日",
                 week: "周一",
                 index: "6-7",
-                checked: "假"
+                checkStatus: "2"
             },
             {
                 date: "2017年10月5日",
                 week: "周一",
                 index: "5-8",
-                checked: "已签(补)"
+                checkStatus: "3"
             },
             {
                 date: "2017年10月7日",
                 week: "周四",
                 index: "9-10",
-                checked: "已签"
+                checkStatus: "0"
             },
             {
                 date: "2017年10月3日",
                 week: "周三",
                 index: "1-3",
-                checked: "已签"
+                checkStatus: "0"
             },
         ]
     }
@@ -299,24 +244,34 @@ exports.fetchCheckedMessage = (conf, callback) => {
     })
     */
 }
+//获取绑定信息
 exports.fetchIdentity = (conf, callback)=>{
-    const data = '1';//1为老师 -1 为学生 0 是没有绑定
-    if(callback){
-        callback(data);
-    }
-    /*
-    wx.request({
-        url: ,
-    })
-    */
+    wx.login({
+        success: res => {
+            const code = res.code;//拿到res.code去换取openId及绑定信息
+            wx.request({
+                url: conf.url,
+                method: "POST",
+                data: {
+                    code: code
+                },
+                success: (res) => {
+                    typeof callback == "function" && callback(res.data);
+                },
+                fail:(res)=>{
+                console.log(res);
+                }
+            })
+        }
+    });
 }
 exports.fillCourse = (data) => {
     for(let key in data){
         const target = data[key];
-        const length = target.length;
+       /// const length = target.length;
         if (target[0].start > 1) {
             for (let i = 0; i < target.length;i++){
-                const item = target[i];
+               // const item = target[i];
                 assit.fill(target);
             }
         }
@@ -353,6 +308,7 @@ exports.addColor = (data) => {
         let item = data[i];
         item.color = assit.randomColor();
     }
+    return data;
 }
 exports.searchSomething = (obj, data) =>{
     let target = [];
@@ -365,4 +321,19 @@ exports.searchSomething = (obj, data) =>{
         }
     }
     return false;
+}
+exports.checkTodayCourse = (target, course, time,teacherName)=>{
+    return target.some((item)=>{
+        if (item.course == course && item.time == time && item.teacher == teacherName){
+            return true;
+        }else{
+            return false;
+        }
+    });
+}
+exports.showToast = (title, duration = 2000)=>{
+    wx: wx.showToast({
+        title: title,
+        duration: duration,
+    })
 }

@@ -1,3 +1,4 @@
+<block wx:if="{{mark}}">
 <view class="bound-container">
     <image  class="bound-container-img" src="../../../res/images/home/bound.png" ></image>
     <view class="bound-container-body">
@@ -6,7 +7,7 @@
         </view>
         <view class="input-wrap">
             <image class="input-tip-img" src="../../../res/images/home/account.png" mode="center"></image>
-            <input bindinput='handleAccontInput' class="bound-input"  type="number" placeholder="请输入您的一卡通账号"  />
+            <input bindinput='handleAccontInput' class="bound-input"  type="number" placeholder="请输入您的一卡通账号" />
         </view>
         <view class="input-wrap">
             <image class="input-tip-img" src="../../../res/images/home/password.png" mode="center"></image>
@@ -17,3 +18,4 @@
         </view>
     </view>
 </view>
+</block>

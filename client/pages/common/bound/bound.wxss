@@ -1,6 +1,8 @@
+
 .bound-container{
     width:100%;
 }
+
 .bound-container-body {
     width:80%;
     margin:0 auto;
@@ -9,6 +11,7 @@
 .bound-container-img{
     width:100%;
 }
+
 .bound-container-body-title {
     color: #B4617D;
     font-size: 18px;

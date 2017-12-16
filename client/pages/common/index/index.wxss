@@ -1,7 +1,7 @@
 .time-container {
   display: flex;
   flex-direction: column;
-  margin-top:10px;
+  margin-top:20rpx;
   color:#B5627E;
 }
 .time-date, .time-week {
@@ -23,22 +23,16 @@
 .course-list-item {
     padding-top:8px;
     padding-bottom:8px;
+    background:#B5627E;
+    margin-left:20rpx;
+    margin-right:20rpx;
+    border-radius: 8px;
 }
-.course-list, .course-first, .course-next{
+.course-list, .course-list-item, .course-next{
     display: flex;
     flex-direction: column;
     text-align: center;
     color: #fff;
-}
-.course-first, .course-next {
-    margin-left:20rpx;
-    margin-right:20rpx;
-}
-.course-first {
-    background: #66CDFF;
-}
-.course-next {
-   background: #DE5899;
 }
 .list-item {
     padding-top:8px;
@@ -46,6 +40,9 @@
     margin-left:20rpx;
     margin-right:20rpx;
 }
-.course-first-name, .course-next-name{
+.course-name{
     font-size: 24px;
+}
+.course-first-wish{
+    font-size:18px;
 }

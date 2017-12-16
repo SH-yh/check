@@ -12,10 +12,10 @@ Page({
         const courseRecord = [
             {
                 "course":'数据结构',
-                "lessonNumber":'02',
+                "lessonId":'02',
                 "grade":"2014级",
                 "major":"计算机科学与技术",
-                "courseNumber": '1520',
+                "courseId": '1520',
                 "class":"5班",
                 "checkNum":"14"
             },
@@ -24,8 +24,8 @@ Page({
                 "grade": "2014级",
                 "major": "网络安全",
                 "class": "5班",
-                "courseNumber":'1520',
-                "lessonNumber": '02',
+                "courseId":'1520',
+                "lessonId": '02',
                 "checkNum": "14"
             }
         ];

@@ -24,19 +24,19 @@
                                         <block wx:if="{{course[i+1][idx]['gap'] == 2}}"><!--两节课-->
                                             <view class="timeable-wrap-clourse-content-two effects" 
                                             style="background:{{course[i+1][idx].color}}">
-                                                <text>{{course[i+1][idx]['course']}}({{course[i+1][idx]['room']}})</text>
+                                                <text>{{course[i+1][idx]['course']}}({{course[i+1][idx]['site']}})</text>
                                             </view>
                                         </block>
                                         <block wx:elif="{{course[i+1][idx]['gap'] == 3}}"><!--三节课-->
                                             <view class="timeable-wrap-clourse-content-three effects"
                                             style="background:{{course[i+1][idx].color}}">
-                                                <text>{{course[i+1][idx]['course']}}({{course[i+1][idx]['room']}})</text>
+                                                <text>{{course[i+1][idx]['course']}}({{course[i+1][idx]['site']}})</text>
                                             </view>
                                         </block>
                                          <block wx:elif="{{course[i+1][idx]['gap'] == 4}}"><!--四节课-->
                                             <view class="timeable-wrap-clourse-content-four  effects" 
                                             style="background:{{course[i+1][idx].color}}">
-                                                <text>{{course[i+1][idx]['course']}}({{course[i+1][idx]['room']}})</text>
+                                                <text>{{course[i+1][idx]['course']}}({{course[i+1][idx]['site']}})</text>
                                             </view>
                                         </block>
                                     </block>

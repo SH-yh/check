@@ -1,6 +1,6 @@
 <view class="teacher-caselist-container">
     <block wx:for="{{caseList}}" wx:key="{{index}}" wx:for-item="list">
-        <navigator url="/pages/teacher/caselistitem/caselistitem?id={{list.id}}&&lessonId={{list.lessonId}}&&classId={{list.classId}}" hover-class='none' class="caselist-wrap">
+        <navigator url="/pages/teacher/caselistitem/caselistitem?id={{list.id}}&&lessonId={{list.courseId}}&&classId={{list.lessonId}}" hover-class='none' class="caselist-wrap">
             <text class="list-course">{{list.course}}</text>
             <view class="record-time">
                 <text>{{list.date}}</text>

@@ -1,25 +1,27 @@
 <!--index.wxml-->
-<block wx:if="{{boundMark}}">
-    <view class="container">
-        <view class="course">
-            <view class="time-container">
-                <text class="time-date">{{date.date}}</text>
-                <text class="time-week">{{date.week}}</text>
-            </view>
-            <view class="course-list">
-                <text class="course-tip-first course-tip">{{courseInfo.first.tip}}</text>
-                <view class="course-first course-list-item">
-                    <text class="course-first-name list-item">{{courseInfo.first.name}}</text>
-                    <text class="course-first-site list-item">{{courseInfo.first.site}}</text>
-                    <text class="course-first-time list-item">{{courseInfo.first.time}}</text>
+<view class="container" id="container" style="margin-top:{{top}}rpx">
+    <view class="course">
+        <view class="time-container">
+            <text class="time-date">{{date.date}}</text>
+            <text class="time-week">{{date.week}}</text>
+        </view>
+        <view class="course-list">
+        <block wx:for="{{courseInfo}}" wx:for-item="course" wx:key="{{key}}">
+            <text class="course-tip-first course-tip">{{course.tip}}</text>
+            <block wx:if="{{course.wish}}">
+                <view class="course-list-item">
+                    <text class="course-first-wish list-item">{{course.wish}}</text>
                 </view>
-                <text class="course-tip-next course-tip">{{courseInfo.next.tip}}</text>
-                <view class="course-next course-list-item">
-                    <text class="course-next-name list-item">{{courseInfo.next.name}}</text>
-                    <text class="course-next-site list-item">{{courseInfo.next.site}}</text>
-                    <text class="course-next-time list-item">{{courseInfo.next.time}}</text>
+            </block >
+            <block wx:else>
+                <view class="course-list-item">
+                    <text class="course-name list-item">{{course.course}}</text>
+                    <text class="course-first-site list-item">{{course.site}}</text>
+                    <text class="course-first-time list-item">{{course.time}}</text>
                 </view>
-            </view>
+            </block>
+        </block>
         </view>
     </view>
-</block>
+</view>
+

@@ -7,14 +7,16 @@
         <text class="recordcase-item">签到情况</text>
     </view>
     <view class="recordcase-body">
-        <block wx:for='{{checkedMessage}}' wx:key="{{index}}">
-            <view class="recordcase-body-wrap">
-                <text class="recordcase-item">{{checkedMessage[index].date}}</text>
-                <text class="recordcase-item">{{course}}</text>
-                <text class="recordcase-item">{{checkedMessage[index].week}}</text>
-                <text class="recordcase-item">{{checkedMessage[index].index}}</text>
-                <text class="recordcase-item">{{checkedMessage[index].checked}}</text>
-            </view>
-        </block>
+        <scroll-view scroll-y scroll-with-animation style="height:{{scrollHeight}}px" class="student-recordcas-wrap">
+            <block wx:for='{{checkedMessage}}' wx:key="{{index}}">
+                <view class="recordcase-body-wrap">
+                    <text class="recordcase-item">{{checkedMessage[index].date}}</text>
+                    <text class="recordcase-item">{{course}}</text>
+                    <text class="recordcase-item">{{checkedMessage[index].week}}</text>
+                    <text class="recordcase-item">{{checkedMessage[index].index}}</text>
+                    <text class="recordcase-item">{{checkStatus[checkedMessage[index].checkStatus]}}</text>
+                </view>
+            </block>
+     </scroll-view>
     </view>
 </view>

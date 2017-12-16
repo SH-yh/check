@@ -1,4 +1,5 @@
 const tool = require('../../../res/third/tool.js');
+const app = getApp();
 Page({
     queryValue :"",
     data: {
@@ -8,10 +9,27 @@ Page({
 
     onLoad: function (options) {
         const conf = {
-            url: 'https://www.check.qianyanxu.com/record/courses',
-            dataType: 'json',
+            url: 'https://check.qianyanxu.com/student/course/checkrecord',
+            data: {
+                "openId": app.openId
+            },
             method: 'POST'  
         }
+        tool.fetch(conf, (result)=>{
+            const record = tool.addColor(result.data.record.check);
+            if (result.statusCode == 200){
+                wx.getSystemInfo({
+                    success: (res) => {
+                        this.setData({
+                            scrollHeight: res.windowHeight - 120,
+                            checkReaord: record
+                        });
+                    }
+                })
+               
+            }
+        })
+        /*
         tool.fetchCheckRecord(conf,(data)=>{
             tool.addColor(data);
             wx.getSystemInfo({
@@ -24,6 +42,7 @@ Page({
                 }
             })
         });
+        */
     },
     onReady() {
     },

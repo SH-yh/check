@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/common/index/index",
     "pages/common/bound/bound",
+    "pages/common/index/index",
     "pages/common/person/person",
     "pages/common/timetable/timetable",
     "pages/common/check/check",

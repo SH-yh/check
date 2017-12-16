@@ -1,4 +1,5 @@
 const tool = require('../../../res/third/tool.js');
+const app = getApp();
 Page({
     data: {
         course: null,
@@ -6,9 +7,18 @@ Page({
         count:['',1,2,3,4,5,6,7,8,9,10,11]
     },
     onLoad(){
-        tool.fetchData((data) => {
-            let newDate = tool.fillCourse(data);
-            this.setData({ course: newDate});
+        const conf = {
+            "url":"https://check.qianyanxu.com/base/course/table",
+            "data":{
+                "type":app.boundType,
+                "openId": app.openId
+            },
+            "method":"POST"
+        }
+        tool.fetch(conf,(res) => {
+            if (res.statusCode){
+                this.setData({ course: res.data.course });
+            }
         })
     }
 })

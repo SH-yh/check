@@ -1,6 +1,20 @@
 <view class="ask-container">
     <view class="ask-display">
-        <image src="{{askSrc}}" mode='aspectFit'></image>
+        <image class="add-image" bindtap="chooseImage" src="{{askSrc}}" mode='aspectFit'></image>
+    </view>
+    <view class="ask-describe">
+        <view class="ask-describe-item">
+            <input class="ask-course" id="courseName" bindinput='handleInputChange' type="text" placeholder='请输入课程名' />
+        </view>
+        <view class="ask-describe-item">
+            <input class="ask-course" id="teacherName" bindinput='handleInputChange' type="text" placeholder='请输入老师姓名' />
+        </view>
+        <view  class="ask-describe-item">
+            <input class="ask-course" id="time" bindinput='handleInputChange' type="text" placeholder='请输入该课程上课标准时间例如(8:00-9:40)'/>
+        </view>
+    </view>
+    <view class="warn">
+         <text>警告：只允许为当天的课程请假</text>
     </view>
     <view class="ask-btn-wrap">
         <text bindtap="handleAskBtn" class="ask-btn-up">{{btnState}}</text>
