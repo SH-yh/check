@@ -6,7 +6,7 @@
   "major" : "计算机科学与技术",
   "grade" : "2014级",
   "class" : "5班",
-  "openId" : "",
+  "openId" : "123456",
   "boundMark" : "1",
   "boundType" : "-1",
   "courseList" : [
@@ -59,7 +59,7 @@
       "lessonId" : "01",
       "time" : "10:10-11:50",
       "week" : "1",
-      "start" : "1",
+      "start" : "3",
       "gap" : "2",
       "teacher" : "冯国伟",
       "site" : "A6-124"

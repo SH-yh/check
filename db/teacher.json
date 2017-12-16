@@ -3,7 +3,7 @@
   "name" : "冯国伟",
   "account" : "12345",
   "password" : "000000",
-  "openId" : "",
+  "openId" : "12345",
   "boundMark" : "",
   "boundType" : "",
   "courseList" : [
@@ -15,6 +15,11 @@
     {
       "course" : "C语言",
       "courseId" : "2635",
+      "lessonId" : "02"
+    },
+    {
+      "course" : "毛概",
+      "courseId" : "2055",
       "lessonId" : "02"
     }
   ],
@@ -40,8 +45,8 @@
       "site" : "A3-124"
     },
     {
-      "course" : "C语言",
-      "courseId" : "2635",
+      "course" : "毛概",
+      "courseId" : "2055",
       "lessonId" : "02",
       "time" : "19:30-21:30",
       "week" : "3",
