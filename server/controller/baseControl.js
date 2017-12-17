@@ -78,11 +78,11 @@ exports.course = (req, res, next) => {
     const collectionName = type == 1 ?　"teacher" : "student";
     db.getSomething(collectionName, query, assign, (data)=>{
         if(!data){//如果今天没有课
-            const tip = {
+            const tip = [{
                 "tip":"休息时间",
                 "wish":"主人您没课了，请尽情吩咐！",
                 "ok":0
-            };
+            }];
             res.json({course:tip});
         }else{//今天有课
             //获取当天的课程，并将其按时间顺序排列好

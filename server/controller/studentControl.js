@@ -77,36 +77,54 @@ exports.ask = (req, res, next)=>{
             const studentQuery = {
                 "openId":openId,
             };
+            const studentAssign = {
+                "account":1,
+                "name":1
+            };
             const teacherQuery = {
                 "name":teacherName,
                 "courseList.course":course
             };
-            const set = {
+            const studentSet = {
                 "$push":{
                     ask: {
-                        date: date,
-                        id: id,
-                        course: course,
-                        index: time,//请的是第几节课的假,
-                        imgPath: imgPath
+                        "date": date,
+                        "id": id,
+                        "course": course,
+                        "index": time,//请的是第几节课的假,
+                        "imgPath": imgPath
                     }
                 }
             };
-            console.log(teacherQuery);
-           db.updateSomething(collectionName, studentQuery, set, (err, result)=>{
-               if(err || result.n == 0){
-               }else if(result){
-                    db.updateSomething('teacher', teacherQuery, set, (err, result)=>{
-                        if(err || result.n == 0){
-                            res.json({ok:0});
-                        }else{
-                            res.json({
-                                ok:1
-                            });
+            db.getSomething(collectionName, studentQuery, studentAssign, (message)=>{
+                const teacherSet = {
+                    "$push":{
+                        ask: {
+                            "account":message.account,
+                            "name":message.name,
+                            "date": date,
+                            "id": id,
+                            "course": course,
+                            "index": time,//请的是第几节课的假,
+                            "imgPath": imgPath
                         }
-                    })
-               }
-           });
+                    }
+                };
+                db.updateSomething(collectionName, studentQuery, studentSet, (err, result)=>{
+                    if(err || result.n == 0){
+                    }else if(result){
+                        db.updateSomething('teacher', teacherQuery, teacherSet, (err, result)=>{
+                            if(err || result.n == 0){
+                                res.json({ok:0});
+                            }else{
+                                res.json({
+                                    ok:1
+                                });
+                            }
+                        })
+                    }
+                });
+            });
         });
     });
 };

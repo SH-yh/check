@@ -16,7 +16,7 @@ router.post('/course/record/history', (req, res, next) => {
 });
 //某班某一课程历史考勤记录学生情况
 router.post('/course/record/history/recordcase', (req, res, next) => {
-    teacherControl.recordCase(req, res, next);
+    teacherControl.recordCaseItem(req, res, next);
 });
 //学生考勤状态修改
 router.post('/course/record/checkstatus', (req, res, next) => {

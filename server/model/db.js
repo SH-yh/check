@@ -35,6 +35,15 @@ exports.getSomething = (collectionName, query, assign, cb) => {
         });
     });
 };
+exports.getMany = (collectionName, query, assign, cb) => {
+    _connecteMongo((db)=>{
+        db.collection(collectionName).find(query, assign).toArray((err, res)=>{
+            if(err) throw new Error(err);
+            typeof cb == "function" && cb(res);
+            db.close();
+        });
+    });
+};
 //更新数据库中某些内容
 exports.updateSomething = (collectionName, query, set, cb)=>{
     _connecteMongo((db)=>{

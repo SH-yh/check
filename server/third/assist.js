@@ -36,7 +36,7 @@ const courseColor = (arg) => {
 const findStart = (arg) => {
     let obj = [];
     for (let i = 0; i < arg.length; i++) {
-        obj.push(arg[i].start);
+        obj.push(arg[i].start+"");
     }
     return obj;
 };

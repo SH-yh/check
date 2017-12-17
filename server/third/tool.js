@@ -101,3 +101,123 @@ exports.addColor = (data) => {
     }
     return data;
 };
+//整合老师全部考勤信息
+exports.tidyRecord = (item) => {
+    const courseList = item.courseList;
+    const check = item.check;
+    const result = [];
+    check.map((item)=>{
+        const courseName = item.course;
+        const checkNum = item.checkList.length;
+        let obj = {
+            "course":courseName,
+            "checkNum":checkNum,
+            "lessonId":item.lessonId,
+            "courseId":item.courseId
+        };
+        //获取每门课的对应的班级
+        courseList.map((course)=>{
+            if(course['course'] == courseName){
+                obj.major = course.major;
+                obj.class = course.class;
+                obj.grad = course.grad;
+            }
+        });
+        result.push(obj);
+    });
+    return result;
+};
+exports.getHistoryRecord = (item, lessonId, courseId)=>{
+    return item.filter((item)=>{
+        if(item.lessonId == lessonId && item.courseId == courseId){
+            return true;
+        }else{
+            return false;
+        }
+    })
+};
+exports.getRecordCase = (item, courseName)=>{
+    let caseArray = [];
+    item.map((record)=>{//开始遍历每一个同学的考勤情况
+        const check = record.check;
+        let caseObj = {};
+        check.map((caseItem)=>{//拿到该学生所有课程的考勤情况
+            if(caseItem.course == courseName){//拿到某一课程的考勤情况
+                const name = record.name;
+                const account = record.account;
+                let checkNum = 0;//记录签到次数
+                let askNum = 0;//记录请假次数
+                let unCheckNum = 0;//记录缺勤次数
+                let lateNum = 0;
+                let checkStatus = caseItem.checkStatus;
+                //开始该同学该课程统计考勤情况
+                checkStatus.map((status)=>{
+                    switch(status.checkStatus){
+                        case "0"://签到
+                            checkNum++;
+                            break;
+                        case "1"://缺勤
+                            unCheckNum++;
+                            break;
+                        case "2"://请假
+                            askNum++;
+                            break;
+                        case "3"://补签
+                            lateNum++;
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                //开始包装对象
+                caseObj.name = name;
+                caseObj.account = account;
+                caseObj.checkNum = checkNum;
+                caseObj.askNum = askNum;
+                caseObj.unCheckNum = unCheckNum;
+                caseObj.lateNum = lateNum;
+                caseArray.push(caseObj);
+            };
+        })
+    });
+    return caseArray;
+};
+exports.getRecordCaseItem = (item, id, course)=>{
+    let studentObj = [];
+    item.map((student)=>{//获取符合条件的同学
+        const check = student.check;
+        check.map((checkItem)=>{
+            if(checkItem.course == course){
+                const account = student.account;
+                const name = student.name;
+                let caseItem = {};
+                const checkStatus = checkItem.checkStatus;
+                checkStatus.map((statusItem)=>{
+                    if(statusItem.id == id){
+                        caseItem.name = name;
+                        caseItem.account = account;
+                        caseItem.checkStatus = statusItem.checkStatus;
+                        caseItem.id = id;
+                        caseItem.course = course;
+                        studentObj.push(caseItem);
+                    }
+                });
+            }
+        });
+    });
+    return studentObj;
+};
+exports.getCheckStatus = (item, course, status, id)=>{
+    const check = item.filter((target)=>{
+        if(target.course == course){
+            const checkStatus = target.checkStatus;
+            checkStatus.map((statusItem)=>{
+                if(statusItem.id == id){
+                    statusItem.checkStatus = status;
+                };
+            });
+            return true;
+        }
+    });
+    return check;
+};
