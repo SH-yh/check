@@ -12,38 +12,7 @@ exports.getDate = () => {
     week : week
   };
 }
-exports.fetchCourse = (callback)=>{
-    const data = {
-        "boundMark": false,
-        "first": {
-            "tip":"当前课程",
-            "name": "数据结构",
-            "site": "A6-301",
-            "time": "8:00-9:40"
-        },
-        "next": {
-            "tip": "下一节课",
-            "name": "计算机网络",
-            "site": "A3-603",
-            "time": "10:10-11:50"
-        }
-    }
-    if(callback){
-        callback(data);
-    }
-    /*
-    wx.request({
-        url: "",
-        method: "POST",
-        dataType: "json",
-        success: (date)=>{
-            if(callback){
-                callback(date);
-            }
-        }
-    })
-    */
-}
+
 //进行绑定
 exports.fetch = (conf, callback)=>{
    wx.request({
@@ -69,67 +38,7 @@ exports.getUserInfo = (callback)=>{
         }
     });
 }
-exports.fetchData = (callback) => {
-    const data = {
-            "1":[
-                {   "course": "数据仓库与数据挖掘",
-                    "start": 1,
-                    "gap":2,
-                    "site": 'A3-202'
-                }, 
-                {
-                    "course": "数字图像处理",
-                    "start": 3,
-                    "gap": 2,
-                    "site": 'A6-302'
-                },     
-                {
-                    "course": "移动端开发",
-                    "start": 9,
-                    "gap": 2,
-                    "site": 'A4-305'
-                },     
-            ],
-            "4":[
-                {
-                    "course": "计算机图形学",
-                    "start": 7,
-                    "gap": 2,
-                    "site": 'A6-315'
-                }
-            ],
-            "2":[
-                {
-                    "course": "计算机图形学",
-                    "start": 5,
-                    "gap": 4,
-                    "site": 'A4-305'
-                }
-            ],
-            "7":[
-                {
-                    "course": "就算计图形学",
-                    "start": 1,
-                    "gap": 2,
-                    "site": 'A6-105'
-                }
-            ]
-    }
-    if (callback) {
-        callback(data);
-    }
-    /*
-    wx.request({
-        url: url,
-        dataType: "json",
-        success: (data) => {
-            if (callback) {
-                callback(data);
-            }
-        }
-    })
-    */
-}
+
 exports.fetchCheckRecord = (conf, callback) => {
     const data = [
             {
@@ -232,17 +141,6 @@ exports.fetchCheckedMessage = (conf, callback) => {
     if (callback) {
         callback(data);
     }
-    /*
-    wx.request({
-        url: url,
-        dataType: "json",
-        success: (data) => {
-            if (callback) {
-                callback(data);
-            }
-        }
-    })
-    */
 }
 //获取绑定信息
 exports.fetchIdentity = (conf, callback)=>{
@@ -265,43 +163,8 @@ exports.fetchIdentity = (conf, callback)=>{
         }
     });
 }
-exports.fillCourse = (data) => {
-    for(let key in data){
-        const target = data[key];
-       /// const length = target.length;
-        if (target[0].start > 1) {
-            for (let i = 0; i < target.length;i++){
-               // const item = target[i];
-                assit.fill(target);
-            }
-        }
-        for (let i = 0; i < target.length; i++) {
-            const item = target[i];
-            let obj = assit.findStart(target);
-            const index = item.start + item.gap;
-            if (obj.indexOf(index) == -1 && index < 12) {
-                target.splice(i + 1, 0, {
-                    "start": index,
-                    "gap": 1,
-                })
-            }
-        }
-        courseColor(data);
-    }
-    return data;
-}
-const courseColor = (arg) => {
-    for (let key in arg) {
-        const target = arg[key];
-        const length = target.length;
-        for (let i = 0; i < length; i++) {
-            const item = target[i];
-            if (item.gap != 1) {
-                item.color = assit.randomColor();
-            }
-        }
-    }
-}
+
+
 exports.addColor = (data) => {
     const length = data.length;
     for (let i = 0; i < length; i++){

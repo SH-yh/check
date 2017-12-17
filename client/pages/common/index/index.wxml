@@ -1,4 +1,4 @@
-<!--index.wxml-->
+
 <view class="container" id="container" style="margin-top:{{top}}rpx">
     <view class="course">
         <view class="time-container">
@@ -8,11 +8,11 @@
         <view class="course-list">
         <block wx:for="{{courseInfo}}" wx:for-item="course" wx:key="{{key}}">
             <text class="course-tip-first course-tip">{{course.tip}}</text>
-            <block wx:if="{{course.wish}}">
-                <view class="course-list-item">
-                    <text class="course-first-wish list-item">{{course.wish}}</text>
-                </view>
-            </block >
+                <block wx:if="{{course.wish}}">
+                    <view class="course-list-item">
+                        <text class="course-first-wish list-item">{{course.wish}}</text>
+                    </view>
+                </block >
             <block wx:else>
                 <view class="course-list-item">
                     <text class="course-name list-item">{{course.course}}</text>

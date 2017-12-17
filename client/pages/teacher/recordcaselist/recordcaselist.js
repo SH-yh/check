@@ -1,56 +1,51 @@
-// pages/teacher/recordcaselist/recordcaselist.js
+const tool = require("../../../res/third/tool.js");
+const app = getApp();
 Page({
-  data: {
-    caseList:null
-  },
-  onLoad: function (options) {
-      const caseList = [
-          {
-              'date':'2017年10月2日',
-              'id':'0',//用来表示第几次考勤
-              'courseId':'123',//课程号
-              'lessonId': '02',//课序号
-              'time':'10：15',
-              'course':'数据结构'
-          },
-          {
-              'date': '2017年10月2日',
-              'id': '0',//用来表示第几次考勤
-              'courseId': '123',//课程号
-              'lessonId': '02',//课序号
-              'time': '10：15',
-              'course': '数据结构'
-          },
-          {
-              'date': '2017年10月2日',
-              'id': '0',//用来表示第几次考勤
-              'courseId': '123',//课程号
-              'lessonId': '02',//课序号
-              'time': '10：15',
-              'course': '数据结构'
-          }
-      ]
-      this.setData({ caseList:caseList});
-  },
-  onReady: function () {
-  
-  },
-  onShow: function () {
-  
-  },
-  onHide: function () {
-  
-  },
-  onUnload: function () {
-  
-  },
-  onPullDownRefresh: function () {
-  
-  },
-  onReachBottom: function () {
-  
-  },
-  onShareAppMessage: function () {
-  
-  }
+    data: {
+        caseList:null
+    },
+    onLoad: function (options) {
+        const course = options.course;
+        const courseId = options.courseId;
+        const lessonId = options.lessonId;
+        const conf = {
+            "url":"https://check.qianyanxu.com/teacher/course/record/history",
+            "method":"POST",
+            "data":{
+                "openId":app.openId,
+                "courseId": courseId,
+                "lessonId": lessonId ,
+            }
+        }
+        tool.fetch(conf, (res)=>{
+            const recordHistory = res.data.record;
+            this.setData({
+                caseList: recordHistory.checkList,
+                courseId: recordHistory.courseId,
+                lessonId: recordHistory.lessonId,
+                course : course   
+            });
+        });
+    },
+    onReady: function () {
+    
+    },
+    onShow: function () {
+    
+    },
+    onHide: function () {
+    
+    },
+    onUnload: function () {
+    
+    },
+    onPullDownRefresh: function () {
+    
+    },
+    onReachBottom: function () {
+    
+    },
+    onShareAppMessage: function () {
+    
+    }
 })

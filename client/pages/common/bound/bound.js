@@ -87,9 +87,10 @@ Page({
                 }
                 //进行绑定
                 tool.fetch(conf, (res)=>{
-                    if (res.ok) {//如果绑定成功，将boundMark，boundType绑定到全局
-                        app.boundMark = res.boundMark;
-                        app.boundType = res.boundType;
+                    const result = res.data;
+                    if (result.ok) {//如果绑定成功，将boundMark，boundType绑定到全局
+                        app.boundMark = result.boundMark;
+                        app.boundType = result.boundType;
                         //页面转到首页
                         wx.switchTab({
                             url: '/pages/common/index/index',

@@ -4,10 +4,10 @@ Page({
     data: {
         userInfo: null,
         boundType: "",
-        tip:3,
+        tip:0,
         studentFunction: [
             {
-                name: '课程表', 
+                name: '课程表',             
                 iconPath:'../../../res/images/person/course.png',
                 url: '/pages/common/timetable/timetable'
             },
@@ -40,7 +40,6 @@ Page({
                 id: 2,
                 iconPath: '../../../res/images/person/handle.png',
                 url: '/pages/teacher/handleask/handleask',
-                tip:3
             }
         ]
     },
@@ -52,10 +51,38 @@ Page({
         });
         tool.getUserInfo((userInfo) => {
             const nickName = userInfo.nickName;
-            const localNickName = wx.getStorageSync('userInfo').nickName;
-            self.setData({
-                userInfo: userInfo
-            });  
+            if(app.boundType==1){//如果用户是老师身份，进行
+                const conf = {
+                    "url":"https://check.qianyanxu.com/teacher/informask",
+                    "method":"POST",
+                    "data":{
+                        "openId": app.openId
+                    }
+                }
+                tool.fetch(conf, (res)=>{
+                    const tip = res.data.tip;
+                    let teacherFunction = self.data.teacherFunction;
+                    teacherFunction.map((item)=>{
+                        if (item.id==2){
+                            item.tip = tip;
+                        }
+                    });
+                    if(tip != 0){
+                        self.setData({
+                            userInfo: userInfo,
+                            teacherFunction: teacherFunction
+                        });  
+                    }else{
+                        self.setData({
+                            userInfo: userInfo
+                        }); 
+                    }
+                });
+            }else{
+                self.setData({
+                    userInfo: userInfo
+                });  
+            }
         })
     },
     onReady(){

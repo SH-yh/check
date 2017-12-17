@@ -17,6 +17,7 @@ Page({
         }
         tool.fetch(conf,(res) => {
             if (res.statusCode){
+                console.log(res.data.course);
                 this.setData({ course: res.data.course });
             }
         })

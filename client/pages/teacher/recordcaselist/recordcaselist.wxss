@@ -9,5 +9,5 @@
 }
 .record-time {
     text-align: right;
-    padding:10px 20rpx;
+    padding:20rpx 20rpx;
 }

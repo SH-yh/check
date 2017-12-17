@@ -10,11 +10,11 @@
         <view class="teacher-caselistitem-body">
             <block wx:for="{{recordCase}}" wx:for-item="stCase" wx:for-index="id" wx:key="{{stCase.studentId}}">
                 <view class="recordcase-item">
-                    <text class="caselistitem-case-item student-id font-size">{{stCase.studentId}}</text>
+                    <text class="caselistitem-case-item student-id font-size">{{stCase.account}}</text>
                     <text class="caselistitem-case-item font-size student-name">{{stCase.name}}</text>
                    
-                        <picker mode="selector"  range = "{{status}}" value="{{stCase.status}}" class="caselistitem-case-item font-size student-status" id="{{stCase.studentId}}" bindchange="bindPickerChange">
-                            <view style="color:{{stCase.color}}">{{status[stCase.status]}}</view>
+                        <picker mode="selector"  range = "{{status}}" value="{{stCase.checkStatus}}" class="caselistitem-case-item font-size student-status" id="{{stCase.account}}" bindchange="bindPickerChange">
+                            <view style="color:{{stCase.color}}">{{status[stCase.checkStatus]}}</view>
                         </picker>
                 </view>
             </block>

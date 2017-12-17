@@ -12,11 +12,11 @@
         <view class="teacher-recordcase-body">
             <block wx:for="{{recordCase}}" wx:for-item="stCase" wx:key="{{index}}">
                 <view class="recordcase-item">
-                    <text class="recordcase-case-item student-id font-size">{{stCase.studentId}}</text>
+                    <text class="recordcase-case-item student-id font-size">{{stCase.account}}</text>
                     <text class="recordcase-case-item font-size">{{stCase.name}}</text>
-                    <text class="recordcase-case-item font-size">{{stCase.checked}}</text>
-                    <text class="recordcase-case-item font-size">{{stCase.absence}}</text>
-                    <text class="recordcase-case-item font-size">{{stCase.ask}}</text>
+                    <text class="recordcase-case-item font-size">{{stCase.checkNum}}</text>
+                    <text class="recordcase-case-item font-size">{{stCase.unCheckNum}}</text>
+                    <text class="recordcase-case-item font-size">{{stCase.askNum}}</text>
                 </view>
             </block>
         </view>

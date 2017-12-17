@@ -3,7 +3,7 @@ const app = getApp();
 Page({
     data: {
         courseInfo: null,
-        date: tool.getDate(),
+        date: "",
     },
     onLoad(options) {
         const self = this;
@@ -36,7 +36,8 @@ Page({
                 if (res.statusCode) {
                     this.setData({
                         courseInfo: res.data.course,
-                        top: (result.windowHeight - result.containerHeight)/2
+                        top: (result.windowHeight - result.containerHeight)/2,
+                        date:tool.getDate()
                     });
                 }
             });
