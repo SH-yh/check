@@ -31,7 +31,7 @@ router.post('/asklist', (req, res, next)=>{
     teacherControl.askList(req, res, next);
 });
 //显示请假条
-router.post('/displayask', (req, res, next) => {
+router.get('/displayask/:imgPath', (req, res, next) => {
     teacherControl.displayAsk(req, res, next);
 });
 //批复假条

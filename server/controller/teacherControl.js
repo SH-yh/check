@@ -2,6 +2,7 @@
 const db = require('../model/db');
 const collectionName = "teacher";
 const tool = require('../third/tool');
+const path = require('path');
 //老师所有课程的考勤记录
 exports.record = (req, res, next) => {
     const {openId} = req.body;
@@ -184,15 +185,109 @@ exports.askList = (req, res, next) => {
 
 };
 exports.displayAsk = (req, res, next) => {
-    const {imagePath} = req.body;
-    res.sendFile(imagePath, (err)=>{
+    const basePath = '/upload/ask/';
+    const imgPath = req.params.imgPath;
+    const contentPath = path.dirname(__dirname)+basePath+imgPath;
+    res.sendFile(contentPath, (err)=>{
         if (err) {
-            res.status(err.status).end();
+            res.json({
+                res:0
+            });
         }
     })
 };
 //批复假条
 exports.handleAsk = (req, res, next)=> {
+    const {askChange, openId} = req.body;
+    askChange.map((changeItem)=>{
+        const {id, account, checkStatus, course, index, date} = changeItem;
+        //先从老师ask列表中清除该请假记录，然后找到请假的该学生，去更新该次考勤的状态并清空该学生的ask请假列表，
+        const teacherQuery = {
+            "openId":openId,
+            "ask":{
+                "$elemMatch":{
+                    "id":id,
+                    "account":account
+                }
+            }
+        };
+        const set = {
+            "$pull":{
+                "ask":{
+                    "id":id,
+                    "account":account
+                }
+            }
+        };
+        const studentQuery = {
+            "account":account
+        };
+        const queryCollectionName = "student";
+        //第一步更新老师
 
+        db.updateSomething(collectionName, teacherQuery, set, (err,result)=>{
+            if(err || result.n != 1){
+                res.json({ok: 0});
+            }else{
+                //从学生的请假列表将该请假记录删除
+                db.updateSomething(queryCollectionName, studentQuery, set, (err, sResult)=>{
+                    if(err || sResult.n != 1) {
+                        res.json({ok: 0});
+                    }else{
+                        //修改该学生的此次考勤记录的状态
+                        const query = {
+                            account:account,
+                            check:{
+                                "$elemMatch":{
+                                    "course":course,
+                                    "checkStatus.date":date,
+                                    "checkStatus.time":index
+                                }
+                            }
+                        };
+                        const assign = {
+                            "check.checkStatus":1,
+                            "check.course":1
+                        };
+                        db.getSomething(queryCollectionName, query, assign, (checkRecord)=>{
+                            if(checkRecord){
+                                const newCheckStatus = tool.setCheckStatus(checkRecord.check, course, checkStatus, date, index);
+                                const status = newCheckStatus[0].checkStatus;
+                                const set = {
+                                    "$set":{
+                                        "check.$.checkStatus":status
+                                    }
+                                };
+                                db.updateSomething(queryCollectionName, query, set, (err, reply)=>{
+                                    if(err || reply.n == 0){
+                                        res.json({"ok":0})
+                                    }else{
+                                        res.json({"ok":1})
+                                    }
+                                })
+                            }else{
+                                res.json({"ok":0});
+                            }
+                        })
+                    }
+                })
+            }
+        })
+
+    });
 };
-//displayAsk({body:{course:"毛概",account:"20144138075",checkStatus:"02", id:"123654895242x"}});
+
+/*handleAsk({body:{
+    askChange:[
+        {
+            "account" : "20144138050",
+            "date":"2017年12月11日",
+            "openId":"123",
+            "checkStatus":5,
+            "id":"a",
+            "course":"数据结构",
+            "index":"10:10-11:50"
+        }
+    ]
+}});
+*/

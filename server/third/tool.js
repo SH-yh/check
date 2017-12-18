@@ -221,3 +221,17 @@ exports.getCheckStatus = (item, course, status, id)=>{
     });
     return check;
 };
+exports.setCheckStatus = (item, course, status, date, time)=>{
+    const check = item.filter((target)=>{
+        if(target.course == course){
+            const checkStatus = target.checkStatus;
+            checkStatus.map((statusItem)=>{
+                if(statusItem.date == date && statusItem.time == time){
+                    statusItem.checkStatus = status;
+                };
+            });
+            return true;
+        }
+    });
+    return check;
+};
