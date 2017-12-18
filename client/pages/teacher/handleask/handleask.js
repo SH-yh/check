@@ -16,7 +16,6 @@ Page({
             }
         }
         tool.fetch(conf, (res)=>{
-            console.log(res.data.ask);
             if (res.statusCode == 200 && res.data.ask ){
                 this.setData({ askList: res.data.ask });
             }
@@ -32,7 +31,16 @@ Page({
     
     },
     onUnload: function () {
-    
+        const askChange = this.askChange;
+        const conf = {
+            "url":"https://check.qianyanxu.com/teacher/handleask",
+            "data":{
+                "askChange": askChange,
+                "openId":app.openId
+            },
+            "method":"POST"
+        }
+        tool.fetch(conf);
     },
     onPullDownRefresh: function () {
     
@@ -44,13 +52,13 @@ Page({
     
     },
     handleAsk(e){//处理结果 0 ： 批准 后台把该学生此次考勤的状态改为假，1 ： 改为缺勤
-        const handleType = e.detail.value;
+        const checkStatus = e.detail.value;
         const id = e.target.dataset.id;
         const askList = this.data.askList;
         let newList = [];
         askList.map((item)=>{
             if (item.id == id){
-                item.handleType = handleType ;
+                item.checkStatus = checkStatus ;
                 this.askChange.push(item);
                 return;
             }
@@ -60,20 +68,12 @@ Page({
     },
     handleLook(e){
         const path = e.target.dataset.path;
-        const conf = {
-            "url":"https://check.qianyanxu.com/teacher/displayAsk",
-            "method":"POST",
-            "data":{
-                "imagePath":path
+        const imgPath = path.match(/(\d+\.\w+)$/g)[0];
+        wx.previewImage({
+            urls: [`https://check.qianyanxu.com/teacher/displayask/${imgPath}`],
+            err:(err)=>{
+                err && tool.showToast("查看失败");
             }
-        }
-        tool.fetch(conf, (res)=>{
-            wx.previewImage({
-                urls: ["https://check.qianyanxu.com/upload/ask/1513521756114.png"],
-                fail:(err)=>{
-                    console.lof(err);
-                }
-            });
         });
     }
 })

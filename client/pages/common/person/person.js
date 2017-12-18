@@ -90,7 +90,30 @@ Page({
     },
 
     onShow() {
-    
+        const self = this;
+        tool.getUserInfo((userInfo) => {
+            if (app.boundType == 1) {//如果用户是老师身份，进行
+                const conf = {
+                    "url": "https://check.qianyanxu.com/teacher/informask",
+                    "method": "POST",
+                    "data": {
+                        "openId": app.openId
+                    }
+                }
+                tool.fetch(conf, (res) => {
+                    const tip = res.data.tip;
+                    let teacherFunction = self.data.teacherFunction;
+                    teacherFunction.map((item) => {
+                        if (item.id == 2) {
+                            item.tip = tip;
+                        }
+                    });
+                    self.setData({
+                        teacherFunction: teacherFunction
+                    });
+                });
+            }
+        })
     },
     onHide(){
     
@@ -106,5 +129,6 @@ Page({
     },
     onShareAppMessage() {
     
-    }
+    },
+    
 })
