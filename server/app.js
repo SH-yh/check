@@ -12,7 +12,7 @@ const teacher = require('./routes/teacher');
 const app = express();
 app.set('view engine','jade');
 app.set('views', path.resolve(__dirname,'views'));
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'upload')));
 app.use('/student', student);
 app.use('/teacher', teacher);
 app.use('/base', base);
+
 app.get("/", (req, res, next)=>{
   res.end("hello hy");
 });

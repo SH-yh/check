@@ -197,7 +197,7 @@ exports.displayAsk = (req, res, next) => {
     })
 };
 //批复假条
-exports.handleAsk = (req, res, next)=> {
+exports.handleAsk    = (req, res, next)=> {
     const {askChange, openId} = req.body;
     askChange.map((changeItem)=>{
         const {id, account, checkStatus, course, index, date} = changeItem;

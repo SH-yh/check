@@ -4,45 +4,25 @@ const fs = require('fs');
 const path = require('path');
 const debug = require('debug')('checkserver:server');
 const https = require('https');
-const port = normalizePort(process.env.PORT || '8080');
+const WebSocket = require('ws');
+const {check} = require("../controller/checkControl");
+const port = '443';
 app.set('port', port);
 var options = {
     key: fs.readFileSync('../privateKey/2_check.qianyanxu.com.key', 'utf8'),
     cert: fs.readFileSync('../privateKey/1_check.qianyanxu.com_bundle.crt', 'utf8')
 };
-var server = https.createServer(options, app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+
+const server = https.createServer(options, app);
+
+const wss = new WebSocket.Server({ server });
+check.checkIn(wss);
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-
-/**
- * Event listener for HTTP server "error" event.
- */
 
 function onError(error) {
   if (error.syscall !== 'listen') {
@@ -68,9 +48,6 @@ function onError(error) {
   }
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
 
 function onListening() {
   var addr = server.address();
