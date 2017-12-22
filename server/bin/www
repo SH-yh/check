@@ -6,7 +6,7 @@ const debug = require('debug')('checkserver:server');
 const https = require('https');
 const WebSocket = require('ws');
 const {check} = require("../controller/checkControl");
-const port = '443';
+const port = '3030';
 app.set('port', port);
 var options = {
     key: fs.readFileSync('../privateKey/2_check.qianyanxu.com.key', 'utf8'),

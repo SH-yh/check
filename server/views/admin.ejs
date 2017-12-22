@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>管理界面</title>
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+</head>
+<body>
+    <div class="container">
+        <div class="admin-item">
+            <div class="class">
+                <label for="major">
+                    <sapn>专业:</sapn><input type="text" name="major">
+                </label>
+                <label for="grade">
+                    <sapn>年级:</sapn><input type="text"  name="grade">
+                </label>
+                <label for="grade">
+                    <sapn>班级:</sapn><input type="text" name="class" >
+                </label>
+            </div>
+        </div>
+        <div class="admin-item">
+            <h2>个人信息<span class="add-btn">+</span></h2>
+            <div class="person">
+                <label for="name">
+                    <sapn>姓名:</sapn><input type="text" name="name" id="name">
+                </label>
+                <label for="account">
+                    <sapn>学号:</sapn><input type="text" name="account" id="account">
+                </label>
+            </div>
+        </div>
+        <div class="admin-item" id="course_list">
+            <h2>课程表<span class="add-course" id="course_table">+</span></h2>
+            <div class="course-mes">
+                <div class="course">
+                    <label>
+                        <sapn>课程:</sapn><input type="text" name="course">
+                    </label>
+                    <label>
+                        <sapn>课程号:</sapn><input type="text" name="courseId">
+                    </label>
+                    <label>
+                        <sapn>课序号:</sapn><input type="text" name="lessonId">
+                    </label>
+                    <label>
+                        <sapn>老师:</sapn><input type="text" name="teacher" >
+                    </label>
+                </div>
+                <div class="course-list">
+                    <h2>上课时间<span class="add-btn">+</span></h2>
+                    <div class="course-time">
+                        <label>
+                            <sapn>星期:</sapn>
+                            <select name="week" id="week">
+                                <option value="周一">周一</option>
+                                <option value="周二">周二</option>
+                                <option value="周三">周三</option>
+                                <option value="周四">周四</option>
+                                <option value="周五">周五</option>
+                                <option value="周六">周六</option>
+                                <option value="周七">周七</option>
+                            </select>
+                        </label>
+                        <label>
+                            <sapn>时间:</sapn><input type="text" name="time" class="course_time">
+                        </label>
+                        <label>
+                            <sapn>开始节数:</sapn><input type="text" name="start">
+                        </label>
+                        <label>
+                            <sapn>持续节数:</sapn><input type="text" name="gap" class="course_gap">
+                        </label>
+                        <label>
+                            <sapn>地点:</sapn><input type="text" name="site" id="course_site">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn">
+            <span class="submit" id="submit">提交</span>
+        </div>
+    </div>
+    <script src="/javascripts/jquery-3.2.1.min.js"> </script>
+    <script src="/javascripts/admin.js"> </script>
+</body>
+</html>

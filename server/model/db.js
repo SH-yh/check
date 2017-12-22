@@ -57,9 +57,15 @@ exports.updateSomething = (collectionName, query, set, cb)=>{
 exports.updateMay = (collectionName, query, set, cb)=>{
     _connecteMongo((db)=>{
         db.collection(collectionName).updateMany(query, set, (err, res)=>{
-            console.log(err, res)
             typeof cb == "function" && cb(err, res.result);
             db.close();
         })
+    })
+};
+exports.insertDocument = (collectionName, data, cb) => {
+    _connecteMongo((db)=>{
+        db.collection(collectionName).insertMany(data).then((result)=>{
+            cb(result);
+        });
     })
 };

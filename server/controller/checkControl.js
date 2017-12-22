@@ -152,7 +152,7 @@ class CheckSystem {
         })
     }
     handleClose(ws, message, roomPath){
-        
+
     }
 };
 

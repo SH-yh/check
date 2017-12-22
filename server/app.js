@@ -8,20 +8,22 @@ const bodyParser = require('body-parser');
 const base = require('./routes/base');
 const student = require('./routes/student');
 const teacher = require('./routes/teacher');
+const admin = require('./routes/admin');
 
 const app = express();
-app.set('view engine','jade');
+app.set('view engine','ejs');
 app.set('views', path.resolve(__dirname,'views'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'upload')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/student', student);
 app.use('/teacher', teacher);
 app.use('/base', base);
+app.use('/admin', admin);
 
 app.get("/", (req, res, next)=>{
   res.end("hello hy");
@@ -35,6 +37,7 @@ app.use(function(req, res, next) {
 
 // 发生错误处理
 app.use(function(err, req, res, next) {
+    console.log(err);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);
