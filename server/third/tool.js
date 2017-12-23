@@ -46,7 +46,7 @@ exports.getCloseTwoCourse = (course)=>{
 exports.tidyCourse = (course) => {
     let tidCourse = {};
     course.map((item)=>{
-        const week = item.week;
+        const week = item.week == "0" ? 7 : item.week;
         if(week in tidCourse){//如果在tidCourse里面已经有了该星期的建，则将其添加进去该星期数组
             tidCourse[week].push(item);
         }else{

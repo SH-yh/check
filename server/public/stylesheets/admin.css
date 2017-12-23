@@ -4,6 +4,7 @@
     margin:60px auto;
 }
 .admin-item,.course-list{
+    font-size: 16px;
     margin-top:10px;
     margin-bottom:10px;
 }
@@ -35,6 +36,7 @@ label {
     margin-right:10px;
 }
 input{
+    font-size: 16px;
     border:none;
     outline: none;
     padding-top:5px;
@@ -66,4 +68,7 @@ select{
     background:#0076A4;
     color:#fff;
     cursor: pointer;
+}
+label sapn {
+    vertical-align: middle;
 }

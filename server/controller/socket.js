@@ -23,4 +23,7 @@ teacherList.addMember = (name, usrId)=>{
         return false;//false表示用户已经签过到了。
     }
 };
+teacherList.deleteRoom = (roomPath)=>{
+    (roomPath in teacherList) && delete teacherList[roomPath];
+};
 module.exports = teacherList;

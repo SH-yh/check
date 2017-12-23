@@ -48,7 +48,6 @@ exports.getMany = (collectionName, query, assign, cb) => {
 exports.updateSomething = (collectionName, query, set, cb)=>{
     _connecteMongo((db)=>{
         db.collection(collectionName).updateOne(query, set, (err, res)=>{
-            console.log(err, res)
             typeof cb == "function" && cb(err, res.result);
             db.close();
         })

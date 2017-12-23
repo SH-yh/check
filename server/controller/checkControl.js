@@ -5,18 +5,18 @@ const url = require("url");
 class CheckSystem {
     checkIn(wss){
         wss.on("connection", (ws, req)=>{
-            const roomPath = req.url;
+            const roomPath = decodeURI(req.url);
             ws.on('message', (message) => {
                 this.handleMessage(ws, message, roomPath);
             });
-            ws.on('close', (message) => {
-                this.handleClose(ws, message, roomPath);
+            ws.on('close', (code, reason ) => {
+                this.handleClose(ws, code, reason , roomPath);
             });
         });
 
     }
     handleMessage(ws, message, roomPath){
-        const {type} = data;
+        const {type} = JSON.parse(message);
         if(type == 1){ //如果用户是老师的话就把用户设为聊天室的管理员
             this.handleTeacherWx(ws, message, roomPath);
         }else if(type == -1){//如果是学生的把他加入相应聊天室
@@ -31,16 +31,16 @@ class CheckSystem {
         this.id = id;
         teacherList.addRoom(roomPath, ws, check);//创建聊天室
         teacherList.setKeyValue(roomPath, "checkStatus", true);//开启签到
-        teacherList.setKeyValue(roomPath, "id", checkWay);//设置Id
+        teacherList.setKeyValue(roomPath, "id", id);//设置Id
         //设置相应的考勤方式
-        teacherList.setKeyValue(roomPath, "checkWay", id);
+        teacherList.setKeyValue(roomPath, "checkWay", checkWay);
         //修改老师相应课程的考勤记录
         this.buildTeacherCheckRecord(data, (err, result)=>{
             //查询这门课一共有多少人
             if(result.n == 1){
-                this.getStudentSum(roomPath, course, courseId, lessonId, (result)=>{
+                this.getStudentSum(course, courseId, lessonId, (result)=>{
                     teacherList[roomPath].totalMember = result;
-                    ws.send(result.length);//发送老师这门课程一共有多少学生
+                    ws.send(JSON.stringify({sum:result.length}));//发送老师这门课程一共有多少学生
                 });
             }
         });
@@ -48,24 +48,9 @@ class CheckSystem {
     }
     handleStudentWx(ws, message, roomPath){
         const data = JSON.parse(message);
-        const {type, openId, checkWay} = data;
+        const {openId} = data;
         const room = teacherList[roomPath];//拿到相应的聊天室群
-        if(!room){
-            wx.send(JSON.stringify({"check":1}));//不可以签到
-            return;
-        }
-        if(("check" in room) && !room.check){//如果可以签到
-            ws.send(JSON.stringify({"check":0}));
-            return;
-        }
-        if(!teacherList.addMember(roomPath, openId)){//如果已经签到到了
-            ws.send(JSON.stringify({"check":-1}));
-            return;
-        }
-        const {query} = message;
-        if(query){//如果为真，表示学生端查询签到方式
-            wx.send(JSON.stringify({"checkWay":room.checkWay}))
-        }else{//学生端通过了考勤检测，可以向老师端进行提交
+        if(('query' in message) &&  message.query){//如果为真，表示学生端查询签到方式
             //向老师通知签到情况（人数）
             //更改学生考勤记录
             this.handleStudentCheckStatus(data, (err, result)=>{
@@ -73,7 +58,21 @@ class CheckSystem {
                     room.owner.send( JSON.stringify({"checkSum":room.checkSum}));
                 }
             });
+        }else{
+            if(!room){
+                ws.send(JSON.stringify({"check":0}));//不可以签到
+                return;
+            }
+            if(("checkStatus" in room) && room.checkStatus){//如果可以签到
+                ws.send(JSON.stringify({"check":1,"checkWay":room.checkWay}));
+                return;
+            }
+            if(!teacherList.addMember(roomPath, openId)){//如果已经签到到了
+                ws.send(JSON.stringify({"check":-1}));
+                return;
+            }
         }
+
     }
     getStudentSum( course, courseId, lessonId, cb){
         const query = {
@@ -151,8 +150,9 @@ class CheckSystem {
             typeof cb == "function" && cb(err, result);
         })
     }
-    handleClose(ws, message, roomPath){
-
+    handleClose(ws, code, reason , roomPath){
+        teacherList.deleteRoom(roomPath);
+        ws.close();
     }
 };
 

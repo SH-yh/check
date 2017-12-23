@@ -1,7 +1,11 @@
 "use strict";
 exports.fillCourse = (data) => {
     for(let key in data){
-        const target = data[key];
+        const item = data[key];
+        const target = item.sort((pre, now)=>{
+            return pre.start-now.start > 0 ? true : false;
+        });
+        console.log(target);
         if (target[0].start > 1) {//如果不是一天的第一节课,对其前的时间进行填充
             for (let i = 0; i < target.length;i++){
                 fill(target);
@@ -43,7 +47,7 @@ const findStart = (arg) => {
 const fill = (arg) => {
     for (let i = arg[0].start; i > 1; i--) {
         arg.unshift({
-            "start": i - 1,
+            "start": i - 1+"",
             "gap": 1
         });
     }

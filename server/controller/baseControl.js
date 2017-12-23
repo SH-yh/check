@@ -64,7 +64,7 @@ exports.bound = (req, res, next) => {
 exports.course = (req, res, next) => {
     const {openId,type, mark} = req.body;
     const date = new Date();
-    const week = date.getDay().toString();
+    let week = date.getDay().toString();
     const query = {//组装查询条件
         "openId":openId,
         "course.week":week

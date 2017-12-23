@@ -40,13 +40,13 @@ $(function(){
             '<label>'+
             '<sapn>星期:</sapn>'+
         '<select name="week" id="week">'+
-            '<option value="周一">周一</option>'+
-            '<option value="周二">周二</option>'+
-            '<option value="周三">周三</option>'+
-            '<option value="周四">周四</option>'+
-            '<option value="周五">周五</option>'+
-            '<option value="周六">周六</option>'+
-            '<option value="周七">周七</option>'+
+            '<option value="1">周一</option>'+
+            '<option value="2">周二</option>'+
+            '<option value="3">周三</option>'+
+            '<option value="4">周四</option>'+
+            '<option value="5">周五</option>'+
+            '<option value="6">周六</option>'+
+            '<option value="0">周七</option>'+
             '</select>'+
             '</label>'+
             '<label>'+
@@ -99,13 +99,16 @@ $(function(){
                     }
                     courseTable[key] = value;
                     if(i == 3){
+                        var start = Number(courseTable.start);
+                        var gap = Number(courseTable.gap);
+                        var index = start + "-" + (gap+start-1);
+                        courseTable.index = index;
                         course.push(courseTable);
                     }
                 }
             });
             //一个课程遍历完毕
             courseList.push(list);
-            j = 0;
         });
         //遍历完毕拿到课程表和课程相关的所有信息
 
@@ -121,30 +124,50 @@ $(function(){
         var person = $('.person');
         person.map(function(index, item){
             usr = {};
+            usr.openId = "";
+            usr.boundMark="";
+            usr.boundType="";
+            usr.password="000000";
+            usr.courseList = courseList;
+            usr.course = course;
+            usr.check = [];
+            usr.ask = [];
             var personInput = $(item).find('input');
             personInput.map(function(index, target){
                 var input = $(target);
                 var key = input.attr('name');
                 var value = input.val();
                 usr[key] = value;
+                if(key == "account"&&usr[key].length == 5){
+                    courseList.map(function(item, index){
+                        usr.check.push({
+                            "course" : item.course,
+                            "courseId" : item.courseId,
+                            "lessonId" : item.lessonId,
+                            "checkList" : []
+                        });
+                    });
+                }else if((key == "account"&&usr[key].length == 11)) {
+                    courseList.map(function(item, index){
+                        usr.check.push({
+                            "course" : item.course,
+                            "teacher" : item.teacher,
+                            "askSum" : 0,
+                            "checkSum" : 0,
+                            "unCheckedSum" : 0,
+                            "checkStatus" : []
+                        });
+                    });
+                }
             });
-            usr.course = course;
-            usr.courseList = courseList;
-            usr.openId = "";
-            usr.boundMark="";
-            usr.boundType="";
-            usr.password="000000";
-            usr.check = [];
-            usr.ask = [];
             member.push(usr);
         });
         //将数据传送给服务器
         var data = {
             'member':member
         };
-
         $.ajax({
-            "url":"https://127.0.0.1:3030/admin",
+            "url":"https://check.qianyanxu.com/admin",
             "method":"POST",
             "contentType": "application/json; charset=utf-8",
             "data":JSON.stringify({ "member":member}),
