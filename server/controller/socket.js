@@ -16,11 +16,15 @@ teacherList.setKeyValue = (name, key, value) => {
 teacherList.addMember = (name, usrId)=>{
     const room = teacherList[name];
     if(room.member.indexOf(usrId) == -1) {
-        room.checkSum++;
         room.member.push(usrId);
-        return true;//返回true，代表用户可以进行签到
+    }
+};
+teacherList.checkExist = (name, usrId)=>{
+    const room = teacherList[name];
+    if(room.member.indexOf(usrId) == -1) {
+       return false;
     }else{
-        return false;//false表示用户已经签过到了。
+        return true;
     }
 };
 teacherList.deleteRoom = (roomPath)=>{

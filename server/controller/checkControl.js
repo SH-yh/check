@@ -9,9 +9,12 @@ class CheckSystem {
             ws.on('message', (message) => {
                 this.handleMessage(ws, message, roomPath);
             });
+
             ws.on('close', (code, reason ) => {
+                console.log(code, reason , roomPath);
                 this.handleClose(ws, code, reason , roomPath);
             });
+
         });
 
     }
@@ -25,7 +28,7 @@ class CheckSystem {
     }
     handleTeacherWx(ws, message, roomPath){
         const data = JSON.parse(message);
-        const {type, openId, checkWay, course, courseId, lessonId} = data;
+        const {checkWay, course, courseId, lessonId} = data;
         const check = data.check;
         const id = +new Date();
         this.id = id;
@@ -34,28 +37,33 @@ class CheckSystem {
         teacherList.setKeyValue(roomPath, "id", id);//设置Id
         //设置相应的考勤方式
         teacherList.setKeyValue(roomPath, "checkWay", checkWay);
+        ws.on('close', ()=>{//如果老师关闭该连接的话，处理没有签到的同学
+            this.handleUncheckStudent(roomPath, data);
+        });
         //修改老师相应课程的考勤记录
         this.buildTeacherCheckRecord(data, (err, result)=>{
             //查询这门课一共有多少人
             if(result.n == 1){
                 this.getStudentSum(course, courseId, lessonId, (result)=>{
-                    teacherList[roomPath].totalMember = result;
+                    teacherList[roomPath].totalMember = result;//把该老师这门课程的所有学生添加进来
                     ws.send(JSON.stringify({sum:result.length}));//发送老师这门课程一共有多少学生
                 });
             }
         });
-
     }
     handleStudentWx(ws, message, roomPath){
+        console.log(message, roomPath);
         const data = JSON.parse(message);
         const {openId} = data;
         const room = teacherList[roomPath];//拿到相应的聊天室群
-        if(('query' in message) &&  message.query){//如果为真，表示学生端查询签到方式
+        if(data.query){//如果为真，表示学生端查询签到方式
             //向老师通知签到情况（人数）
             //更改学生考勤记录
             this.handleStudentCheckStatus(data, (err, result)=>{
+                console.log(result);
                 if(result.n != 0){
-                    room.owner.send( JSON.stringify({"checkSum":room.checkSum}));
+                    teacherList.addMember(roomPath, openId);
+                    room.owner.send( JSON.stringify({"checkSum":++room.checkSum}));
                 }
             });
         }else{
@@ -67,7 +75,7 @@ class CheckSystem {
                 ws.send(JSON.stringify({"check":1,"checkWay":room.checkWay}));
                 return;
             }
-            if(!teacherList.addMember(roomPath, openId)){//如果已经签到到了
+            if(!teacherList.checkExist(roomPath, openId)){//如果已经签到到了
                 ws.send(JSON.stringify({"check":-1}));
                 return;
             }
@@ -122,8 +130,9 @@ class CheckSystem {
         //需要插入的信息有考勤的id，考勤日期，考勤时间（10：10-11：50），课程index
     }
     handleStudentCheckStatus(data, cb){
-        const {courseId, lessonId, course, time, index} = data;
+        const {openId, courseId, lessonId, course, time, index} = data;
         const query = {
+            "openId":openId,
             "courseList":{
                 "$elemMatch":{
                     "courseId" : courseId,
@@ -143,6 +152,9 @@ class CheckSystem {
                     "index" : index,
                     "checkStatus" : "0"
                 }
+            },
+            "$inc":{
+                "check.$.checkSum":1
             }
         };
         const collectionName = "student";
@@ -150,20 +162,51 @@ class CheckSystem {
             typeof cb == "function" && cb(err, result);
         })
     }
-    handleClose(ws, code, reason , roomPath){
-        teacherList.deleteRoom(roomPath);
-        ws.close();
+    handleUncheckStudent(roomPath){
+        const room = teacherList[roomPath];
+        const totalMember = room.totalMember;
+        const member = room.member;
+        const unCheckMember = totalMember.filter((item)=>{
+            if(member.indexOf(item) == -1){
+                return true;
+            }else{
+                return false;
+            }
+        });
+        this.handleUncheckStatus(unCheckMember);
+    }
+    handleUncheckStatus(member, data){
+        const collectionName = "student";
+        const {course, week, index, time} = data;
+        member.map((item)=>{
+            const query = {
+                "openId":item.openId,
+                "course.course":course
+            };
+            const set = {
+                "$push":{
+                    "check.$.checkStatus":{
+                        "id" : this.id,
+                        "date" : date,
+                        "time" : time,
+                        "week" : week,
+                        "index" : index,
+                        "checkStatus" : "2"
+                    }
+                },
+                "$inc":{
+                    "check.$.askSum":1
+                }
+            };
+            db.updateSomething(collectionName, query, set, (err, result)=>{
+                console.log(err, result);
+            })
+        });
     }
 };
 
 const check = new CheckSystem();
-const getQuery = (query) =>{
-    const queryObj = {};
-    query.replace(/((\w+)=(\w+))&&*/g, (item, firstSub, secondSub, thirdSub)=>{
-        queryObj[secondSub] = thirdSub;
-    });
-    return queryObj;
-};
+
 
 module.exports = {
     "check": check,
