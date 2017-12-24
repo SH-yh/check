@@ -1,5 +1,4 @@
-
-<view class="container" id="container" style="margin-top:{{top}}rpx">
+<view class="container" id="container">
     <view class="course">
         <view class="time-container">
             <text class="time-date">{{date.date}}</text>

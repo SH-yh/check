@@ -1,3 +1,42 @@
-<template  name="studentCheck">
+<template  name="studentCheckGps">
     <map class="check-map" scale="18" controls="{{controls}}" show-location longitude="{{longitude}}" latitude="{{latitude}}" bindcontroltap="handleCheck" style="height:{{mapHeight}}px"></map>
+</template>
+<template  name="studentCheckRandom">
+    <view class="container">
+        <view class="container-wrap">
+            <view class="check-random-title">
+                <text>口令</text>
+            </view>
+            <view class="check-random">
+                <block wx:for="{{random}}" wx:for-item="number" wx:key="{{index}}" >
+                    <text class="random-number">{{number}}</text>
+                </block>
+            </view>
+            <view>
+                <text class="check-btn" bindtap='handleCheckRandom'>签到</text>
+            </view>
+        </view>
+        <view class="keyboard">
+            <view class="keyboard-row-item">
+                <block wx:for="{{[7, 8, 9]}}" wx:key="{{index}}">
+                    <text id="{{item}}" class="key-item" bindtap='handleKeyItem'>{{item}}</text>
+                </block>
+            </view>
+            <view class="keyboard-row-item">
+                <block wx:for="{{[4, 5, 6]}}" wx:key="{{index}}">
+                    <text id="{{item}}" class="key-item" bindtap='handleKeyItem'>{{item}}</text>
+                </block>
+            </view>
+            <view class="keyboard-row-item">
+                <block wx:for="{{[3, 2, 1]}}" wx:key="{{index}}">
+                    <text id="{{item}}" class="key-item" bindtap='handleKeyItem'>{{item}}</text>
+                </block>
+            </view>
+            <view class="keyboard-row-item">
+                <text class="key-item"></text>
+                <text class="key-item" id="0" bindtap='handleKeyItem'>0</text>
+                <text class="key-item" bindtap='handleDelKeyItem'>-</text>
+            </view>
+        </view>
+    </view>
 </template>

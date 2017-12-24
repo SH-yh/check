@@ -39,109 +39,7 @@ exports.getUserInfo = (callback)=>{
     });
 }
 
-exports.fetchCheckRecord = (conf, callback) => {
-    const data = [
-            {
-                "course": "数据仓库与数据挖掘",
-                "id": 321456,
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "site": 'A3-202'
-            },
-            {
-                "course": "数字图像处理",
-                "id": 456972,
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "site": 'A6-302'
-            },
-            {
-                "course": "算法",
-                "id": 5698742,
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "site": 'A4-305'
-            },
-            {
-                "course": "数据结构",
-                "id": 78964,
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "site": 'A4-305'
-            },
-            {
-                "course": "离散",
-                "id": 5698742,
-                "checked": 12,
-                "unChecked": 3,
-                "vacate": 1,
-                "teacher": 'HY',
-                "site": 'A4-305'
-            },
-        ];
-    if (callback) {
-        callback(data);
-    }
-    /*
-    wx.request({
-        url: url,
-        dataType: "json",
-        success: (data) => {
-            if (callback) {
-                callback(data);
-            }
-        }
-    })
-    */
-}
-exports.fetchCheckedMessage = (conf, callback) => {
-    const data = {
-        course: "数据结构",
-        message: [
-            {
-                date: "2017年10月1日",
-                week:"周一",
-                index:"6-7",
-                checkStatus:"0"
-            },
-            {
-                date: "2017年10月3日",
-                week: "周一",
-                index: "6-7",
-                checkStatus: "2"
-            },
-            {
-                date: "2017年10月5日",
-                week: "周一",
-                index: "5-8",
-                checkStatus: "3"
-            },
-            {
-                date: "2017年10月7日",
-                week: "周四",
-                index: "9-10",
-                checkStatus: "0"
-            },
-            {
-                date: "2017年10月3日",
-                week: "周三",
-                index: "1-3",
-                checkStatus: "0"
-            },
-        ]
-    }
-    if (callback) {
-        callback(data);
-    }
-}
+
 //获取绑定信息
 exports.fetchIdentity = (conf, callback)=>{
     wx.login({
@@ -199,4 +97,25 @@ exports.showToast = (title, duration = 2000)=>{
         title: title,
         duration: duration,
     })
+}
+exports.webSocket = (url, message, cb)=>{
+    wx.connectSocket({
+        "url": encodeURI(url),
+        "method": "GET"
+    })
+    wx.onSocketOpen(function (res) {
+        const data = JSON.stringify(message);
+        wx.sendSocketMessage({
+            "data": data
+        });
+        typeof cb == "function" && cb();
+    })
+    wx.onSocketError(function (res) {
+        console.log('WebSocket连接打开失败，请检查！')
+    });
+}
+exports.webSocketOnMessage = (cb)=>{
+    wx.onSocketMessage((res) => {
+        typeof cb == "function" && cb(res);
+    });
 }

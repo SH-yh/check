@@ -1,4 +1,5 @@
 @import '../../teacher/check/check.wxss';
+@import '../../student/check/check.wxss';
 .check-container{
     position:relative;
     background:#F9F9F9;

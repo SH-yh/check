@@ -12,7 +12,7 @@
                         <view class="record-checked-message">
                             <text class="record-case-item">已签：{{record['checkSum']}}</text>
                             <text class="record-case-item">缺勤：{{record['unCheckedSum']}}</text>
-                            <text class="record-case-item">请假：{{record['checkSum']}}</text>
+                            <text class="record-case-item">请假：{{record['askSum']}}</text>
                         </view>
                         <view class="record-course-message">
                             <text class="record-case-item">教师：{{record['teacher']}}</text>

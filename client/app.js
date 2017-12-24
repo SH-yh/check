@@ -27,5 +27,7 @@ App({
   userInfo:"",
   boundMark:"",
   boundType: "",
-  openId: ""
+  openId: "",
+  courseInfo:null,
+  checkMark:false
 })

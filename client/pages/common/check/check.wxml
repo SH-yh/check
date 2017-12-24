@@ -2,9 +2,16 @@
 <import  src="../../teacher/check/check"/>
 <view class="check-container">
     <block wx:if="{{boundType == -1}}">
-        <template is="studentCheck" data="{{...studentConf}}"/>
+        <block  wx:if="{{checkWay.way == 'gps'}}">
+            <template is="studentCheckGps" data="{{...studentConf}}"/>
+        </block>
+        <block  wx:elif="{{checkWay.way == 'random'}}">
+           <template is="studentCheckRandom" data="{{random}}"/>
+        </block>
     </block>
     <block wx:elif="{{boundType == 1}}">
+    
        <template is="teacherCheck"/>
+
     </block>
 </view>

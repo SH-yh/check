@@ -4,9 +4,9 @@
             <view class="record-content-item" style="background:{{record.color}}" >
                 <view class="record-content-item-wrap">
                     <text class="record-content-course">课程：{{record['course']}}</text>
-                    <view class="record-checked-message">
+                  <!--  <view class="record-checked-message">
                         <text class="record-case-item">年级：{{record['grad']}}{{record['major']}}{{record['class']}}</text>
-                    </view>
+                    </view> -->
                     <view class="record-course-message">
                         <text class="record-case-item">课序号：{{record['lessonId']}}</text>
                         <text class="record-case-item">考勤：{{record['checkNum']}}次</text>

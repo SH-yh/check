@@ -29,20 +29,6 @@ Page({
                
             }
         })
-        /*
-        tool.fetchCheckRecord(conf,(data)=>{
-            tool.addColor(data);
-            wx.getSystemInfo({
-                success: (res) => {
-                    this.setData({
-                        scrollHeight: res.windowHeight - 120,
-                        recordCase: data,
-                        checkReaord: data
-                    });
-                }
-            })
-        });
-        */
     },
     onReady() {
     },

@@ -12,10 +12,13 @@
     </block>
     <block wx:elif="{{checkWay=='gps'}}">
         <view class="check-gps">
-            <map class="check-map" scale="18" show-location longitude="{{mapConf.longitude}}" latitude="{{mapConf.latitude}}"  style="height:{{mapConf.mapHeight-70}}px"></map>
+            <map class="check-map" scale="18" show-location longitude="{{mapConf.longitude}}" latitude="{{mapConf.latitude}}"  style="height:{{mapConf.mapHeight-120}}px"></map>
         </view>
     </block>
     <view class="check-case">
-        <text>{{checkedNum}}</text>/<text>{{sum}}</text>
+        <text>{{checkedSum}}</text>/<text>{{sum}}</text>
+    </view>
+    <view>
+        <text class="end-btn" bindtap='handleEndCheck'>结束</text>
     </view>
 </view>
