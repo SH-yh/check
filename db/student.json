@@ -6,13 +6,13 @@
   "major" : "计算机科学与技术",
   "grade" : "2014级",
   "class" : "5班",
-  "openId" : "123456",
-  "boundMark" : "1",
-  "boundType" : "-1",
+  "openId" : "",
+  "boundMark" : "",
+  "boundType" : "",
   "courseList" : [
     {
       "course" : "数据结构",
-      "courseId" : "0001",
+      "courseId" : "2635",
       "lessonId" : "02",
       "teacher" : "冯国伟"
     },
@@ -30,21 +30,21 @@
     },
     {
       "course" : "毛概",
-      "courseId" : "0004",
-      "lessonId" : "01",
+      "courseId" : "2655",
+      "lessonId" : "02",
       "teacher" : "冯国伟"
     },
     {
       "course" : "创业基础",
-      "courseId" : "0005",
-      "lessonId" : "01",
+      "courseId" : "2645",
+      "lessonId" : "02",
       "teacher" : "冯国伟"
     }
   ],
   "course" : [
     {
       "course" : "数据结构",
-      "courseId" : "0001",
+      "courseId" : "2635",
       "lessonId" : "02",
       "time" : "8:00-9:40",
       "week" : "1",
@@ -77,8 +77,8 @@
     },
     {
       "course" : "毛概",
-      "courseId" : "0004",
-      "lessonId" : "01",
+      "courseId" : "2655",
+      "lessonId" : "02",
       "time" : "19:10-21:30",
       "week" : "6",
       "start" : "1",
@@ -88,8 +88,8 @@
     },
     {
       "course" : "创业基础",
-      "courseId" : "0005",
-      "lessonId" : "01",
+      "courseId" : "2645",
+      "lessonId" : "02",
       "time" : "10:10-11:50",
       "week" : "7",
       "start" : "2",
@@ -100,24 +100,26 @@
   ],
   "check" : [
     {
-      "course" : "数据结构",
+      "course" : "毛概",
       "teacher" : "冯国伟",
-      "askSum" : NumberInt(0),
-      "checkSum" : NumberInt(2),
-      "unCheckedSum" : NumberInt(0),
+      "askSum" : 0,
+      "checkSum" : 2,
+      "unCheckedSum" : 0,
       "checkStatus" : [
         {
           "id" : "123654895242x",
           "date" : "2017年12月11日",
-          "week" : "周一",
-          "index" : "6-7",
-          "checkStatus" : "0"
+          "time" : "10:10-11:50",
+          "week" : "7",
+          "index" : "3-4",
+          "checkStatus" : "1"
         },
         {
-          "id" : "12365acsf4895242x",
+          "id" : "12365acsf4895242",
           "date" : "2017年12月12日",
-          "week" : "周二",
-          "index" : "6-7",
+          "time" : "10:10-11:50",
+          "week" : "7",
+          "index" : "3-4",
           "checkStatus" : "0"
         }
       ]
@@ -125,9 +127,9 @@
     {
       "course" : "创业基础",
       "teacher" : "冯国伟",
-      "askSum" : NumberInt(0),
-      "checkSum" : NumberInt(2),
-      "unCheckedSum" : NumberInt(0),
+      "askSum" : 0,
+      "checkSum" : 2,
+      "unCheckedSum" : 0,
       "checkStatus" : [
         {
           "id" : "123654895242x",
@@ -149,6 +151,12 @@
     }
   ],
   "ask" : [
-
+    {
+      "date" : "2017年11月17日",
+      "id" : NumberLong("1513521756114"),
+      "course" : "创业基础",
+      "index" : "10:10-11:50",
+      "imgPath" : "/root/checkServer/upload/ask/1513521756114.png"
+    }
   ]
 }
