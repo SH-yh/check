@@ -1,0 +1,105 @@
+{
+  "_id" : ObjectId("5a30de4979781a155ceeb3a9"),
+  "name" : "冯国伟",
+  "account" : "12345",
+  "password" : "000000",
+  "openId" : "oBP0O0cZBHInkmFyW5TtdWDQa5FE",
+  "boundMark" : "1",
+  "boundType" : 1,
+  "courseList" : [
+    {
+      "course" : "数据结构",
+      "courseId" : "2635",
+      "lessonId" : "02",
+      "major" : "计算机科学与技术",
+      "class" : "5班",
+      "grad" : "2014级"
+    },
+    {
+      "course" : "创业基础",
+      "courseId" : "2645",
+      "lessonId" : "02",
+      "major" : "计算机科学与技术",
+      "class" : "1班",
+      "grad" : "2016级"
+    },
+    {
+      "course" : "毛概",
+      "courseId" : "2655",
+      "lessonId" : "02",
+      "major" : "计算机科学与技术",
+      "class" : "3班",
+      "grad" : "2015级"
+    }
+  ],
+  "course" : [
+    { "course" : "数据结构",
+      "courseId" : "2635",
+      "lessonId" : "02",
+      "time" : "8:00-9:40",
+      "week" : "1",
+      "start" : "1",
+      "gap" : "2",
+      "site" : "A6-124"
+    },
+    { "course" : "创业基础",
+      "courseId" : "2645",
+      "lessonId" : "02",
+      "time" : "10:10-11:50",
+      "week" : "7",
+      "start" : "3",
+      "gap" : "2",
+      "site" : "A3-124"
+    },
+    {
+      "course" : "毛概",
+      "courseId" : "2655",
+      "lessonId" : "02",
+      "time" : "19:30-21:30",
+      "week" : "3",
+      "start" : "6",
+      "gap" : "3",
+      "site" : "A3-124"
+    }
+  ],
+  "check" : [
+    {
+      "course" : "毛概",
+      "courseId" : "2655",
+      "lessonId" : "02",
+      "checkList" : [
+        {
+          "id" : "123654895242x",
+          "date" : "2017年12月11日",
+          "time" : "10:11",
+          "week" : "周一",
+          "index" : "6-7"
+        },
+        {
+          "id" : 1513858937329,
+          "date" : "2017年11月21日",
+          "time" : "10:10-11:50",
+          "week" : "7",
+          "index" : "3-4",
+          "checkStatus" : "0"
+        }
+      ]
+    },
+    {
+      "course" : "C语言",
+      "courseId" : "2645",
+      "lessonId" : "02",
+      "checkList" : [
+        {
+          "id" : "123654895242x",
+          "date" : "2017年12月11日",
+          "time" : "10:11",
+          "week" : "周一",
+          "index" : "6-7"
+        }
+      ]
+    }
+  ],
+  "ask" : [ ],
+  "askHistory" : [ ]
+}
