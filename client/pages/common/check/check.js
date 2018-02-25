@@ -5,13 +5,34 @@ Page({
     data: {
         boundType: "",
         studentConf: null,
-        random: ['', '', '', '']
+        random: ['', '', '', ''],
+        teacherSeting: {
+            animationMark: false,
+        }
     },
     onLoad: function (options) {
+        if (app.boundType == 1){//处理老师的页面转换
+            this.setData({
+                boundType: app.boundType
+            });
+        }
+    },
+    onReady: function () {
+    },
+    onShow: function () {
+        const data = this.data;
+        if (app.boundType == 1){
+            data.animationMark && this.setData(
+                {
+                    animationMark: false
+                }
+            )
+        }
         const self = this;
         if (app.boundType == -1) {//1是老师 -1是学生
             const query = studentCheck.queryCheck();
             query.then((res) => {
+                console.log(res);
                 let message = "";
                 switch (res.check) {
                     case 0:
@@ -35,17 +56,7 @@ Page({
                     })
                 }, 1500)
             });
-        }  else {//1是老师 -1是学生
-            this.setData({
-                boundType: app.boundType
-            });
         }
-    },
-    onReady: function () {
-       
-    },
-    onShow: function () {
-       
     },
     onHide: function () {
         
@@ -67,5 +78,13 @@ Page({
     handleCheck: studentCheck.handleCheck,
     handleDelKeyItem: studentCheck.handleDelKeyItem,
     handleKeyItem: studentCheck.handleKeyItem,
-    handleCheckRandom: studentCheck.handleCheckRandom
+    handleCheckRandom: studentCheck.handleCheckRandom,
+    handleSelectCheckWay(){
+        const animationMark = this.data.animationMark;
+        this.setData(
+            {
+                animationMark: !animationMark
+            }
+        )
+    }
 })

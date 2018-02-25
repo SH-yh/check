@@ -72,6 +72,7 @@ exports.addColor = (data) => {
     return data;
 }
 exports.searchSomething = (obj, data) =>{
+
     let target = [];
     const length = data.length;
     for(let i = 0; i < length; i++){
@@ -93,9 +94,12 @@ exports.checkTodayCourse = (target, course, time,teacherName)=>{
     });
 }
 exports.showToast = (title, duration = 2000)=>{
-    wx: wx.showToast({
+    wx.showToast({
         title: title,
         duration: duration,
+        success: ()=>{
+            console.log(1)
+        }
     })
 }
 exports.webSocket = (url, message, cb)=>{
@@ -118,4 +122,22 @@ exports.webSocketOnMessage = (cb)=>{
     wx.onSocketMessage((res) => {
         typeof cb == "function" && cb(res);
     });
+}
+exports.getTeacherStatus = (courseInfo)=>{
+    const firstCourse = courseInfo[0];
+    if ("wish" in courseInfo[0] || courseInfo[0].tip == "即将上课"){
+        return false;
+    }else{
+        return true;
+    }
+}
+function toRad(d) { return d * Math.PI / 180; }
+exports.getGpsDistance = (lat1, lng1, lat2, lng2)=> {
+    var dis = 0;
+    var radLat1 = toRad(lat1);
+    var radLat2 = toRad(lat2);
+    var deltaLat = radLat1 - radLat2;
+    var deltaLng = toRad(lng1) - toRad(lng2);
+    var dis = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(deltaLat / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(deltaLng / 2), 2)));
+    return (dis * 6378137).toFixed(1);
 }

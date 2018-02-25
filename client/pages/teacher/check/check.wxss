@@ -1,9 +1,53 @@
+.teacher-check-container{
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.check-way-wrap {
+    position: relative;
+}
 .check-way-item {
-    width:80%;
-    padding-top:30px;
-    padding-bottom:30px;
+    position: absolute;
+    width:100rpx;
+    height: 100rpx;
+    top:0;bottom:0;
+    margin:auto;
+    line-height: 100rpx;
+    border-radius: 50%;
     background:#B4617D;
     color:#fff;
     text-align: center;
-    margin:20px auto;
+    z-index:0;
+    left: 50rpx;
+    transition: left 1s;
+}
+.type_lt {
+    left: -130rpx;
+}
+.type_rt {
+    left: 230rpx;
+}
+.check-way-select-btn {
+    position: relative; 
+    display: inline-block;
+    width: 200rpx;
+    height: 200rpx;
+    background:#B4617D;
+    color:#fff;
+    text-align: center;
+    margin:0 auto;
+    border-radius: 50%;
+    z-index:999;
+}
+.check-way-select-tip {
+    display:inline-block;
+    position:absolute;
+    left:0;right:0;
+    top:0;bottom:0;
+    margin:auto;
+    width:200rpx;
+    height:20px;
+    line-height:20px;
 }

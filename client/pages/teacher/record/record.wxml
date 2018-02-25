@@ -1,22 +1,24 @@
+<import src="../../common/search/search.wxml" />
 <view class="teacher-record-container">
-    <block wx:for="{{courseRecord}}" wx:for-item='record' wx:key="{{index}}">
-        <view class="record-wrap" >
-            <view class="record-content-item" style="background:{{record.color}}" >
-                <view class="record-content-item-wrap">
-                    <text class="record-content-course">课程：{{record['course']}}</text>
-                  <!--  <view class="record-checked-message">
-                        <text class="record-case-item">年级：{{record['grad']}}{{record['major']}}{{record['class']}}</text>
-                    </view> -->
-                    <view class="record-course-message">
-                        <text class="record-case-item">课序号：{{record['lessonId']}}</text>
-                        <text class="record-case-item">考勤：{{record['checkNum']}}次</text>
+    <template is="search" data="{{placeholder:'请输入您要查询的课程'}}" />
+    <scroll-view scroll-y scroll-with-animation style="height:{{scrollHeight}}px">
+        <block wx:for="{{courseRecord}}" wx:for-item='record' wx:key="{{index}}">
+            <view class="record-wrap" >
+                <view class="record-content-item" style="background:{{record.color}}" >
+                    <view class="record-content-item-wrap">
+                        <text class="record-content-course">课程：{{record['course']}}</text>
+                        <view class="record-course-message">
+                        <text class="record-case-item">课程号：{{record['courseId']}}</text>
+                            <text class="record-case-item">课序号：{{record['lessonId']}}</text>
+                            <text class="record-case-item">考勤：{{record['checkNum']}}次</text>
+                        </view>
                     </view>
                 </view>
+                <view  class="teacher-record-case-wrap">
+                <navigator class="record-case"  url="/pages/teacher/recordcase/recordcase?course={{record['course']}}&&courseId={{record['courseId']}}&&lessonId={{record['lessonId']}}" hover-class="none" >概况</navigator>
+                <navigator class="record-case"url="/pages/teacher/recordcaselist/recordcaselist?course={{record['course']}}&&courseId={{record['courseId']}}&&lessonId={{record['lessonId']}}&&checkNum={{record['checkNum']}}"  hover-class='none'>详情</navigator>
+                </view>
             </view>
-            <view  class="teacher-record-case-wrap">
-            <navigator class="record-case"  url="/pages/teacher/recordcase/recordcase?course={{record['course']}}&&courseId={{record['courseId']}}&&lessonId={{record['lessonId']}}" hover-class="none" >详情</navigator>
-            <navigator class="record-case"url="/pages/teacher/recordcaselist/recordcaselist?course={{record['course']}}&&courseId={{record['courseId']}}&&lessonId={{record['lessonId']}}"  hover-class='none'>概况</navigator>
-            </view>
-        </view>
-    </block>
+        </block>
+    </scroll-view>
 </view>

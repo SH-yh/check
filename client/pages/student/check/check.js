@@ -47,7 +47,9 @@ exports.queryCheck = () => {
                 "type": "-1",
                 "query":false
             }
+            //学生连接签到室，询问签到类型以及许可
             tool.webSocket(url, message);
+            //得到回复后关闭该连接。
             wx.onSocketMessage((data) => {
                 resolve(JSON.parse(data.data));
                 wx.closeSocket();
@@ -74,15 +76,17 @@ exports.handleCheckWay = (self, checkMark, checkWay) => {
         });  
     }
 }
-exports.handleCheck = ()=> {
+exports.handleCheck = function(){
     if (!app.checkMark) {
-        const teacherLocation = this.checkWay.location;
+        const teacherLocation = this.data.checkWay.location;
         const t_longitude = teacherLocation.longitude;
-        const t_latitude = teacherLocation.t_latitude;
-        const studentLocation = this.studentConf;
+        const t_latitude = teacherLocation.latitude;
+        const studentLocation = this.data.studentConf;
         const s_longitude = studentLocation.longitude;
         const s_latitude = studentLocation.latitude;
-        if (s_latitude == t_latitude && t_longitude == s_longitude) {
+        console.log(s_latitude, s_longitude, t_latitude, t_longitude,666666666);
+        const distance = tool.getGpsDistance(s_latitude, s_longitude, t_latitude, t_longitude);
+        if (distance < 10) {//签到距离老师不足10米视为签到失败
             verify();
         }else{
             tool.showToast("请到教室！");

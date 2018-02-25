@@ -18,94 +18,6 @@ Page({
                 "lessonId": lessonId
             }  
         }
-        /*
-        const data = [
-            {
-                "name":'小明',
-                "studentId":'20141475035',
-                "checked":14,
-                "absence":2,
-                'ask':3
-            },
-            {
-                "name": '小樱',
-                "studentId": '20141475125',
-                "checked": 17,
-                "absence": 2,
-                'ask': 0
-            },
-            {
-                "name": '鸣人',
-                "studentId": '20141475784',
-                "checked": 16,
-                "absence": 2,
-                'ask': 0
-            },
-            {
-                "name": '小红',
-                "studentId": '20141475856',
-                "checked": 18,
-                "absence": 8,
-                'ask': 6
-            },
-            {
-                "name": '阿飞',
-                "studentId": '20141475741',
-                "checked": 19,
-                "absence": 2,
-                'ask': 1
-            },
-            {
-                "name": '小李',
-                "studentId": '20141475145',
-                "checked": 14,
-                "absence": 2,
-                'ask': 0
-            },
-            {
-                "name": '瓦萨',
-                "studentId": '20141475785',
-                "checked": 16,
-                "absence": 2,
-                'ask': 3
-            },
-            {
-                "name": '阿萨',
-                "studentId": '20141475963',
-                "checked": 15,
-                "absence": 2,
-                'ask': 3
-            },
-            {
-                "name": '阿飞',
-                "studentId": '20141475785',
-                "checked": 14,
-                "absence": 2,
-                'ask': 3
-            },
-            {
-                "name": '违法',
-                "studentId": '20141475965',
-                "checked": 15,
-                "absence": 2,
-                'ask': 3
-            },
-            {
-                "name": '违法',
-                "studentId": '20141475784',
-                "checked": 15,
-                "absence": 2,
-                'ask': 3
-            },
-            {
-                "name": '违法',
-                "studentId": '20141475984',
-                "checked": 15,
-                "absence": 2,
-                'ask': 3
-            }
-        ];
-        */
         wx.getSystemInfo({
             success: (res) => {
                 tool.fetch(conf, (result)=>{
@@ -113,7 +25,8 @@ Page({
                     if (result.statusCode == 200 && caseRecord){
                         this.setData({
                             scrollHeight: res.windowHeight - 140,
-                            recordCase: caseRecord
+                            recordCase: caseRecord,
+                            recordCaseCopy: [...caseRecord]
                         });
                     }
                 })
@@ -145,11 +58,11 @@ Page({
         this.queryValue = e.detail.value;
     },
     handleSeacher() {
-        const recordCase = this.data.recordCase;
+        const recordCaseCopy = this.data.recordCaseCopy;
         const result = tool.searchSomething({
-            key: 'studentId',
+            key: 'account',
             value: this.queryValue
-        }, recordCase);
+        }, recordCaseCopy);
         result ? this.setData({ recordCase: result }) : wx.showToast({
             title: '无此学生',
             duration: 2000

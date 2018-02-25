@@ -11,7 +11,7 @@
     </block>
     <block wx:elif="{{boundType == 1}}">
     
-       <template is="teacherCheck"/>
+       <template is="teacherCheck" data="{{animationMark}}"/>
 
     </block>
 </view>

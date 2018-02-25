@@ -1,4 +1,5 @@
 @import '../../../res/style/record.wxss';
+@import '../../../res/style/search.wxss';
 .record-wrap{
     margin-right:20rpx;
     margin-left:20rpx;

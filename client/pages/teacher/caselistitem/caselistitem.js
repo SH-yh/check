@@ -4,6 +4,7 @@ Page({
     data: {
         scrollHeight:'400',
         recordCase:null,
+        recordCaseCopy: null,
         status:['已到', '缺勤', '请假', '补签']
     },
     onLoad: function (options) {
@@ -23,7 +24,8 @@ Page({
                 tool.fetch(conf, (res)=>{
                     this.setData({
                         scrollHeight: setting.windowHeight - 140,
-                        recordCase: res.data.caseItem
+                        recordCase: res.data.caseItem,
+                        recordCaseCopy: [...res.data.caseItem]
                     });
                 })
             }
@@ -95,5 +97,19 @@ Page({
             });
             return newData;
         }
+    },
+    handleQuery(e) {
+        this.queryValue = e.detail.value;
+    },
+    handleSeacher() {
+        const recordCaseCopy = this.data.recordCaseCopy;
+        const result = tool.searchSomething({
+            key: 'account',
+            value: this.queryValue
+        }, recordCaseCopy);
+        result ? this.setData({ recordCase: result }) : wx.showToast({
+            title: '无此学生',
+            duration: 2000
+        })
     }
 })

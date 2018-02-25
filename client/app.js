@@ -2,12 +2,12 @@ const tool = require('/res/third/tool.js');
 App({
   onLaunch() {
       var self = this;
-      //要获取用户的openId,去服务器验证用户是否已经绑定
-      if(wx.getStorageSync('boundMark')){
-          self.boundMark = wx.getStorageSync('boundMark');
-          self.boundType = wx.getStorageSync('boundType');
-          self.userInfo = wx.getStorageSync('userInfo');
-      }
+      
+      wx.getSystemInfo({
+          success: (res) => {
+              self.windowHeight = res.windowHeight;
+          }
+      })
   },
   getUserInfo(cb){
         const self = this;
@@ -28,6 +28,7 @@ App({
   boundMark:"",
   boundType: "",
   openId: "",
+  windowHeight: "",
   courseInfo:null,
   checkMark:false
 })

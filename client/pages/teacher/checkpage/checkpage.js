@@ -11,12 +11,13 @@ Page({
     onLoad: function (options) {
         const courseInfo = app.courseInfo;
         let random = null;
-        if (("wish" in courseInfo[0])){
+        if (!tool.getTeacherStatus(courseInfo)){//false表示无法发起签到，true可以发起签到
             tool.showToast("您当前没有课程");
             setTimeout(()=>(wx.switchTab({url: '/pages/common/index/index'})), 1000)
             return;
         }
         const { courseId, lessonId, index, week, time, course, teacher } = courseInfo[0];
+        console.log(app)
         const message = {
             "check": true,
             "type": app.boundType,
@@ -24,7 +25,8 @@ Page({
             "openId": app.openId,
             "courseId": courseId,
             "lessonId": lessonId,
-            "course": course
+            "course": course,
+            "index":index
         }
         //老师当前时间有课可以发起考勤
         const checkWay = options.way;//获取老师考勤方式
@@ -100,18 +102,17 @@ Page({
     
     },
     handleEndCheck: function(){
+        //结束websocket
         wx.closeSocket({
-            
+            "complete": ()=>{//调用接口成功后，路由转向首页
+                tool.showToast("签到结束！", 1000);
+                setTimeout(()=>{
+                    wx.switchTab({
+                        url: '/pages/common/index/index',
+                    })
+                }, 1000)
+            }
         })
-        /*
-        const courseInfo = app.courseInfo;
-        const { courseId, lessonId, index, week, time, course, teacher } = courseInfo[0];
-        const url = `wss://check.qianyanxu.com/check/${week}/${courseId}/${lessonId}`;
-        const message = {
-            "type":1,
-            "close":true
-        }
-        tool.webSocket(url, message)
-        */
+       
     }
 })

@@ -1,5 +1,5 @@
 <template  name="studentCheckGps">
-    <map class="check-map" scale="18" controls="{{controls}}" show-location longitude="{{longitude}}" latitude="{{latitude}}" bindcontroltap="handleCheck" style="height:{{mapHeight}}px"></map>
+    <map class="check-map" scale="18" controls="{{controls}}" show-location longitude="{{longitude}}" latitude="{{latitude}}" bindcontroltap="handleCheck" style="height:{{mapHeight-100}}px"></map>
 </template>
 <template  name="studentCheckRandom">
     <view class="container">

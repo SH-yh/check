@@ -1,11 +1,13 @@
 <view class="teacher-caselist-container">
-    <block wx:for="{{caseList}}" wx:key="{{index}}" wx:for-item="list">
-        <navigator url="/pages/teacher/caselistitem/caselistitem?id={{list.id}}&&course={{course}}&&courseId={{courseId}}&&lessonId={{lessonId}}" hover-class='none' class="caselist-wrap">
-            <text class="list-course">{{list.date}}</text>
-            <view class="record-time">
-                <text>{{list.week}}</text>
-                <text>{{list.time}}</text>
-            </view>
-        </navigator>
-    </block>
+    <scroll-view scroll-y scroll-with-animation style="height:{{2*scrollHeight}}rpx">
+        <block wx:for="{{caseList}}" wx:key="{{index}}" wx:for-item="list">
+            <navigator url="/pages/teacher/caselistitem/caselistitem?id={{list.id}}&&course={{course}}&&courseId={{courseId}}&&lessonId={{lessonId}}" hover-class='none' class="caselist-wrap">
+                <view class="record-time">
+                    <text class="record-time-left">{{list.date}}</text> 
+                    <text class="record-time-right">{{list.time}}</text>
+                </view>
+                <text class="list-course">{{list.week}}</text>
+            </navigator>
+        </block>
+    </scroll-view>
 </view>

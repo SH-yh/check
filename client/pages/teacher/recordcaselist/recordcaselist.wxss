@@ -1,13 +1,27 @@
 .caselist-wrap{
+    position: relative;
     color:#333;
+    height:160rpx;
     margin:10px 20rpx;
     background:#F6F8F8;
 }
 .list-course{
+    position: absolute;
+    right:20rpx;bottom:5rpx;
     display: inline-block;
     padding:10px 20rpx;
+
 }
 .record-time {
-    text-align: right;
     padding:20rpx 20rpx;
+
+}
+.record-time-left, .record-time-right {
+    position: absolute;
+}
+.record-time-left {
+    left:20rpx;
+}
+.record-time-right{
+    right: 20rpx;
 }

@@ -1,12 +1,15 @@
 <template name="teacherCheck">
 <view class="teacher-check-container">
     <view class="check-way-wrap">
-        <navigator url="/pages/teacher/checkpage/checkpage?way=random" hover-class='none' class="check-way-item">
-             <text>口令签到</text>
-        </navigator> 
-        <navigator url="/pages/teacher/checkpage/checkpage?way=gps" hover-class='none'   class="check-way-item">
-            <text>gps位置签到</text>
-        </navigator>
+        <view class="check-way-select-btn" bindtap="handleSelectCheckWay">
+            <text class="check-way-select-tip" >点击选择</text>
+        </view>
+         <navigator url="/pages/teacher/checkpage/checkpage?way=random" hover-class='none' class='check-way-item  {{animationMark ? "type_lt" : ""}}'>
+                <text>口令</text>
+            </navigator> 
+            <navigator url="/pages/teacher/checkpage/checkpage?way=gps" hover-class='none'   class='check-way-item  {{animationMark ? "type_rt" : ""}}'>
+                <text>gps</text>
+            </navigator>
     </view>
 </view>
 </template>

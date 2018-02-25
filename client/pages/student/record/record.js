@@ -18,15 +18,10 @@ Page({
         tool.fetch(conf, (result)=>{
             const record = tool.addColor(result.data.record.check);
             if (result.statusCode == 200){
-                wx.getSystemInfo({
-                    success: (res) => {
-                        this.setData({
-                            scrollHeight: res.windowHeight - 120,
-                            checkReaord: record
-                        });
-                    }
-                })
-               
+                this.setData({
+                    scrollHeight: app.windowHeight - 120,
+                    checkReaord: record
+                });
             }
         })
     },

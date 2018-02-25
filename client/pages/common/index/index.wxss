@@ -29,6 +29,7 @@
     margin-bottom: 15px;
 }
 .course-list-item {
+    width:75%;
     padding-top:8px;
     padding-bottom:8px;
     background:#B5627E;
@@ -41,6 +42,7 @@
     flex-direction: column;
     text-align: center;
     color: #fff;
+    align-items: center;
 }
 .list-item {
     padding-top:8px;
