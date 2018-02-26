@@ -1,0 +1,11 @@
+<template name = "paging">
+    <view class="paging_wrap">
+        <text class="paging_btn prev_btn" id='prev' bindtap='handlePaging'>上一页</text>
+        <view class="paging_display">
+            <text class="current_page">{{page + 1}}</text>
+            <text class="page_split">/</text>
+            <text class="current_pageSum">{{pageSum}}</text>
+        </view>
+        <text class="paging_btn next_btn" id='next' bindtap='handlePaging'>下一页</text>
+    </view>
+</template>    

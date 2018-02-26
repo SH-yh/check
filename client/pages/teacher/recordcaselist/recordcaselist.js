@@ -1,8 +1,18 @@
 const tool = require("../../../res/third/tool.js");
+const pagingSys =  require("../../common/paging/paging.js");
 const app = getApp();
 Page({
     data: {
-        caseList:null
+        caseList:null,
+        currentCaseList: null,
+        paging: {
+            page:0,
+            skip: 5,
+            pageSum: 1
+        },
+        courseId: null,
+        lessonId: null,
+        course: null,
     },
     onLoad: function (options) {
         const checkNum = options.checkNum;
@@ -28,12 +38,20 @@ Page({
             }
             tool.fetch(conf, (res) => {
                 const recordHistory = res.data.record;
+                const caseList = recordHistory.checkList;
+                const pagingSet = this.data.paging;
+                const currentCaseList = pagingSys.paging(caseList, pagingSet);//获得当前分页数据
+                const paging = {
+                    ...pagingSet,
+                    pageSum: Math.ceil(caseList.length / pagingSet.skip),
+                }
                 this.setData({
-                    caseList: recordHistory.checkList,
+                    caseList: caseList,
+                    currentCaseList: currentCaseList,
                     courseId: recordHistory.courseId,
                     lessonId: recordHistory.lessonId,
+                    paging: paging,
                     course: course,
-                    scrollHeight: app.windowHeight * 2 / 3
                 });
             });
         }
@@ -45,7 +63,7 @@ Page({
     
     },
     onHide: function () {
-    
+        
     },
     onUnload: function () {
     
@@ -57,6 +75,10 @@ Page({
     
     },
     onShareAppMessage: function () {
-    
+
+    },
+    handlePaging: function(e){
+        const dir = e.target.id;
+        pagingSys.handlePaging.call(this, dir);
     }
 })

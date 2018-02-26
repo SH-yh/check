@@ -1,3 +1,4 @@
+@import "../../common/paging/paging.wxss";
 .caselist-wrap{
     position: relative;
     color:#333;

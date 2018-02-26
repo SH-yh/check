@@ -1,13 +1,17 @@
+<import src="../../common/paging/paging.wxml" />
 <view class="teacher-caselist-container">
-    <scroll-view scroll-y scroll-with-animation style="height:{{2*scrollHeight}}rpx">
-        <block wx:for="{{caseList}}" wx:key="{{index}}" wx:for-item="list">
+    <view >
+        <block wx:for="{{currentCaseList}}" wx:key="{{index}}" wx:for-item="list">
             <navigator url="/pages/teacher/caselistitem/caselistitem?id={{list.id}}&&course={{course}}&&courseId={{courseId}}&&lessonId={{lessonId}}" hover-class='none' class="caselist-wrap">
                 <view class="record-time">
                     <text class="record-time-left">{{list.date}}</text> 
                     <text class="record-time-right">{{list.time}}</text>
                 </view>
-                <text class="list-course">{{list.week}}</text>
+                <text class="list-course">{{list.week}}</text>    
             </navigator>
         </block>
-    </scroll-view>
+    </view>
+    <view>
+       <template is="paging" data="{{...paging}}"/>
+    </view>
 </view>

@@ -97,9 +97,7 @@ exports.showToast = (title, duration = 2000)=>{
     wx.showToast({
         title: title,
         duration: duration,
-        success: ()=>{
-            console.log(1)
-        }
+        image: "../../../res/images/public/info.png",
     })
 }
 exports.webSocket = (url, message, cb)=>{

@@ -1,3 +1,4 @@
+<import src="../../common/paging/paging.wxml" />
 <view class="recordcase-container">
     <view class="recordcase-header">
         <text class="recordcase-item">日期</text>
@@ -7,16 +8,19 @@
         <text class="recordcase-item">签到情况</text>
     </view>
     <view class="recordcase-body">
-        <scroll-view scroll-y scroll-with-animation style="height:{{scrollHeight}}px" class="student-recordcas-wrap">
-            <block wx:for='{{checkedMessage}}' wx:key="{{index}}">
+        <view class="student-recordcas-wrap">
+            <block wx:for='{{currentCaseList}}' wx:key="{{index}}">
                 <view class="recordcase-body-wrap">
-                    <text class="recordcase-item">{{checkedMessage[index].date}}</text>
+                    <text class="recordcase-item">{{currentCaseList[index].date}}</text>
                     <text class="recordcase-item">{{course}}</text>
-                    <text class="recordcase-item">{{checkedMessage[index].week}}</text>
-                    <text class="recordcase-item">{{checkedMessage[index].index}}</text>
-                    <text class="recordcase-item">{{checkStatus[checkedMessage[index].checkStatus]}}</text>
+                    <text class="recordcase-item">{{currentCaseList[index].week}}</text>
+                    <text class="recordcase-item">{{currentCaseList[index].index}}</text>
+                    <text class="recordcase-item">{{checkStatus[currentCaseList[index].checkStatus]}}</text>
                 </view>
             </block>
-     </scroll-view>
+        </view>
+    </view>
+    <view>
+        <template is="paging" data="{{...paging}}" />
     </view>
 </view>

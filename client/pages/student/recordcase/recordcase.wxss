@@ -1,3 +1,4 @@
+@import "../../common/paging/paging.wxss";
 .recordcase-header,.recordcase-body-wrap{
     display: flex;
 }
