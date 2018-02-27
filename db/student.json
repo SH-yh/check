@@ -156,7 +156,8 @@
       "id" : NumberLong("1513521756114"),
       "course" : "创业基础",
       "index" : "10:10-11:50",
-      "imgPath" : "/root/checkServer/upload/ask/1513521756114.png"
+      "imgPath" : "/root/checkServer/upload/ask/1513521756114.png",
+      "status": 0 //设置学生请假是否被批准状态
     }
   ]
 }
