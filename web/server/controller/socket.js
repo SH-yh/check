@@ -16,6 +16,7 @@ teacherList.setKeyValue = (name, key, value) => {
 teacherList.addMember = (name, usrId)=>{
     const room = teacherList[name];
     if(room.member.indexOf(usrId) == -1) {
+        console.log(1111111111111);
         room.member.push(usrId);
     }
 };

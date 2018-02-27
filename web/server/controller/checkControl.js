@@ -1,4 +1,4 @@
-const teacherList = require("./socket");
+﻿const teacherList = require("./socket");
 const db = require("../model/db");
 const tool = require("../third/tool");
 const url = require("url");
@@ -23,7 +23,7 @@ class CheckSystem {
         const data = JSON.parse(message);
         const {checkWay, course, courseId, lessonId} = data;
         const check = data.check;
-        const id = +new Date() + "";
+        const id = +new Date();
         this.id = id;
         teacherList.addRoom(roomPath, ws, check);//创建聊天室
         teacherList.setKeyValue(roomPath, "checkStatus", true);//开启签到
@@ -84,7 +84,8 @@ class CheckSystem {
             }
         };
         const assign = {
-            "openId":1
+            "openId":1,
+            "ask": 1,
         };
         const collectionName = "student";
         db.getMany(collectionName, query, assign, (res) =>{
@@ -153,7 +154,7 @@ class CheckSystem {
             typeof cb == "function" && cb(err, result);
         })
     }
-    handleUncheckStudent(roomPath, data){//找到没有签到的同学
+    handleUncheckStudent(roomPath, data){
         const room = teacherList[roomPath];
         const totalMember = room.totalMember;
         const member = room.member;
@@ -170,36 +171,115 @@ class CheckSystem {
                 });
             });
         }
-        this.handleUncheckStatus(unCheckMember, data);
+        this.handleUncheckStatus(roomPath, unCheckMember, data);
     }
-    handleUncheckStatus(member, data){//为没有进行签到的同学修改考勤状态
-        //在这里我们需要先去该学生的请假历史中查看该学生这节课是否请假，如果请假了，并且得到了批准，那么
-        //删除该请假历史，并且修改考勤状态
-        const collectionName = "student";
+    handleUncheckStatus(roomPath, member, data){
+        member.map((item)=>{
+            const status = this.handleAskStudentStatus(item, data);
+            if(status != 0){//代表着老师已经处理了该假条，并且已经批准
+                const collectionName = "student";
+                const teacherQuery = {
+                    "openId":stu.openId,
+                };
+                const set = {
+                    "$pull":{
+                        "ask":{
+                            "id": ask.id
+                        }
+                    }
+                };
+                //删除学生该考勤的请假记录
+                db.updateSomething(collectionName, teacherQuery, set , (err, res)=>{
+                    if(!err || res.n != 0) {
+                        const checkStatus = status == 1 ? 2: 1;
+                        //设置相应的考勤状态
+                        this.modifyStudentStatus(item, data, checkStatus,()=>{
+                            teacherList.deleteRoom(roomPath)
+                        });
+                    }
+                });
+            }else{//代表老师没有处理该假条
+                const checkStatus = 1;
+                this.modifyStudentStatus(item, data, checkStatus,()=>{
+                    teacherList.deleteRoom(roomPath)
+                });
+            }
+        });
+    }
+    handleAskStudentStatus(stu, course){
+        //只要reply.status不为0都需要删除学生的请假记录
+        let reply = {
+            status: 0,
+        };
+        const ask = stu.ask;
+        const openId = stu.openId;
+        ask.map((item, index)=>{
+            const {stuDate, stuCourse, stuIndex, stuStatus, stuId, checkStatus} = item;
+            const {checkDate, checkCourse, checkIndex} = course;
+            if(stuCourse == checkCourse && stuDate ==  checkDate && checkIndex == stuIndex){//如果课程相同代表着该学生这门课程有请过假
+                //代表当前考勤的这门课已经请了假了
+                ask.id = stuId;
+                if(stuStatus == 1 ){ //代表着该门课程的假条老师已经处理并且批准了。
+                    if(checkStatus == 2){ //老师批准
+                        reply.status = 1;
+                    }else if(checkStatus == 1){//老师驳回
+                        reply.status = 2;
+                    }
+                }else if(stuStatus == 0) {//代表着该门课程的假条老师还没有处理
+                    //考勤系统自动将该假条状态修改为 1
+                    const status = 1;
+                    const collectionName = "student";
+                    const query = {
+                        openId: openId,
+                        ask : {
+                            "$elemMatch": {
+                                date: checkDate,
+                                course:checkCourse,
+                                index: checkIndex
+                            }
+                        }
+                    };
+                    const set = {
+                        "$set": {
+                            "ask.$.status": status
+                        }
+                    };
+                    db.updateSomething(collectionName, query, set);
+                    reply.status = 0;
+                }
+            }
+        });
+        return reply.status;
+    }
+    //修改学生的考勤记录
+    modifyStudentStatus(item, data, status, cb){
+        const collectionName = student;
         const {course, index, time} = data;
         const {week, date} = tool.getDate();
-        member.map((item)=>{
-            const query = {
-                "openId":item.openId,
-                "check.course":course
-            };
-            const set = {
-                "$push":{
-                    "check.$.checkStatus":{
-                        "id" : this.id,
-                        "date" : date,
-                        "time" : time,
-                        "week" : week,
-                        "index" : index,
-                        "checkStatus" : 1
-                    }
-                },
-                "$inc":{
-                    "check.$.unCheckedSum":1
+        const query = {
+            "openId":item.openId,
+            "check.course":course
+        };
+        const set = {
+            "$push":{
+                "check.$.checkStatus":{
+                    "id" : this.id,
+                    "date" : date,
+                    "time" : time,
+                    "week" : week,
+                    "index" : index,
+                    "checkStatus" : status
                 }
-            };
-            db.updateSomething(collectionName, query, set);
+            },
+            "$inc":{
+                "check.$.unCheckedSum":1
+            }
+        };
+        db.updateSomething(collectionName, query, set, ()=>{
+            //先关闭签到接口
+           typeof cb == "function" && cb();
         });
+
     }
 };
 

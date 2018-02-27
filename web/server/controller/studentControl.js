@@ -92,8 +92,8 @@ exports.ask = (req, res, next)=>{
                         "id": id,
                         "course": course,
                         "index": time,//请的是第几节课的假,
-                        "imgPath": imgPath,
-                        "status": false//假条是否被处理过
+                        "status": 0,//设置学生请假是否被批准状态 0：初始状态代表未处理 1：批准请假 -1：请假驳回
+                        "imgPath": imgPath
                     }
                 }
             };

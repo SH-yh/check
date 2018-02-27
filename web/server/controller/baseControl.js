@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 const db = require('../model/db');
 const request = require('request');
 const tool = require("../third/tool");
