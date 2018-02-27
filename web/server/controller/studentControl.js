@@ -92,7 +92,8 @@ exports.ask = (req, res, next)=>{
                         "id": id,
                         "course": course,
                         "index": time,//请的是第几节课的假,
-                        "imgPath": imgPath
+                        "imgPath": imgPath,
+                        "status": false//假条是否被处理过
                     }
                 }
             };

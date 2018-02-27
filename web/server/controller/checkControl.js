@@ -153,7 +153,7 @@ class CheckSystem {
             typeof cb == "function" && cb(err, result);
         })
     }
-    handleUncheckStudent(roomPath, data){
+    handleUncheckStudent(roomPath, data){//找到没有签到的同学
         const room = teacherList[roomPath];
         const totalMember = room.totalMember;
         const member = room.member;
@@ -172,8 +172,9 @@ class CheckSystem {
         }
         this.handleUncheckStatus(unCheckMember, data);
     }
-    handleUncheckStatus(member, data){
-        console.log(data);
+    handleUncheckStatus(member, data){//为没有进行签到的同学修改考勤状态
+        //在这里我们需要先去该学生的请假历史中查看该学生这节课是否请假，如果请假了，并且得到了批准，那么
+        //删除该请假历史，并且修改考勤状态
         const collectionName = "student";
         const {course, index, time} = data;
         const {week, date} = tool.getDate();
@@ -190,7 +191,7 @@ class CheckSystem {
                         "time" : time,
                         "week" : week,
                         "index" : index,
-                        "checkStatus" : "1"
+                        "checkStatus" : 1
                     }
                 },
                 "$inc":{

@@ -199,7 +199,7 @@ exports.displayAsk = (req, res, next) => {
 };
 //批复假条
 exports.handleAsk   = (req, res, next)=> {
-    const {askChange, openId} = req.body;
+    const {askChange, openId} = req.body;//openId是老师的openId
     askChange.map((changeItem)=>{
         const {id, account, checkStatus, course, index, date} = changeItem;
         //先从老师ask列表中清除该请假记录，然后找到请假的该学生，去更新该次考勤的状态并清空该学生的ask请假列表，
@@ -224,54 +224,95 @@ exports.handleAsk   = (req, res, next)=> {
             "account":account
         };
         const queryCollectionName = "student";
-        //第一步更新老师
-
+        //第一步更新老师请假列表
         db.updateSomething(collectionName, teacherQuery, set, (err,result)=>{
             if(err || result.n != 1){
                 res.json({ok: 0});
             }else{
-                //从学生的请假列表将该请假记录删除
-                db.updateSomething(queryCollectionName, studentQuery, set, (err, sResult)=>{
-                    if(err || sResult.n != 1) {
-                        res.json({ok: 0});
-                    }else{
-                        //修改该学生的此次考勤记录的状态
+                //先去该学生文档里获取该学生的假条状态，需要的信息，account
+                const queryAskPromise = new Promise((resolve, reject)=>{
+                    const assign  = {
+                        ask:1
+                    };
+                    db.getSomething(queryCollectionName, studentQuery, assign, (res)=>{
+                        //获取假条的处理状态
+                        const status = tool.getStudentAskHandleStatus(res, id);
+                        if(status != void 0){
+                            resolve(status);
+                        }
+                    })
+                });
+                queryAskPromise.then((status)=>{
+                    if(status == 1){//如果假条的状态为1，代表着此次处理是在考勤之后发生的
+                        db.updateSomething(queryCollectionName, studentQuery, set, (err, sResult)=>{
+                            //删除该请假记录
+                            if(err || sResult.n != 1) {
+                                res.json({ok: 0});
+                            }else{
+                                //修改该学生的此次考勤记录的状态
+                                const query = {
+                                    account:account,
+                                    check:{
+                                        "$elemMatch":{
+                                            "course":course,
+                                            "checkStatus.date":date,
+                                            "checkStatus.time":index
+                                        }
+                                    }
+                                };
+                                const assign = {
+                                    "check.checkStatus":1,
+                                    "check.course":1
+                                };
+                                //获取该学生所有的考勤记录
+                                db.getSomething(queryCollectionName, query, assign, (checkRecord)=>{
+                                    if(checkRecord){
+                                        const newCheckStatus = tool.setCheckStatus(checkRecord.check, course, checkStatus, date, index);
+                                        const status = newCheckStatus[0].checkStatus;
+                                        const set = {
+                                            "$set":{
+                                                "check.$.checkStatus":status
+                                            }
+                                        };
+                                        //更新学生的考勤纪律
+                                        db.updateSomething(queryCollectionName, query, set, (err, reply)=>{
+                                            if(err || reply.n == 0){
+                                                res.json({"ok":0})
+                                            }else{
+                                                res.json({"ok":1})
+                                            }
+                                        })
+                                    }else{
+                                        res.json({"ok":0});
+                                    }
+                                })
+                            }
+                        })
+                    }else if(status == 0){
+                        //如果假条的状态为0，代表着此次处理是在考勤之前发生的
+                        //只需要改变将假条
+                        //考勤系统自动将该假条状态修改为 1
+                        const status = 1;
+                        const collectionName = "student";
                         const query = {
-                            account:account,
-                            check:{
-                                "$elemMatch":{
-                                    "course":course,
-                                    "checkStatus.date":date,
-                                    "checkStatus.time":index
+                            openId: openId,
+                            ask : {
+                                "$elemMatch": {
+                                    date: checkDate,
+                                    course:checkCourse,
+                                    index: checkIndex
                                 }
                             }
                         };
-                        const assign = {
-                            "check.checkStatus":1,
-                            "check.course":1
-                        };
-                        db.getSomething(queryCollectionName, query, assign, (checkRecord)=>{
-                            if(checkRecord){
-                                const newCheckStatus = tool.setCheckStatus(checkRecord.check, course, checkStatus, date, index);
-                                const status = newCheckStatus[0].checkStatus;
-                                const set = {
-                                    "$set":{
-                                        "check.$.checkStatus":status
-                                    }
-                                };
-                                db.updateSomething(queryCollectionName, query, set, (err, reply)=>{
-                                    if(err || reply.n == 0){
-                                        res.json({"ok":0})
-                                    }else{
-                                        res.json({"ok":1})
-                                    }
-                                })
-                            }else{
-                                res.json({"ok":0});
+                        const set = {
+                            "$set": {
+                                "ask.$.status": status
                             }
-                        })
+                        };
+                        db.updateSomething(collectionName, query, set);
                     }
-                })
+                });
+
             }
         })
 
@@ -286,7 +327,8 @@ exports.handleAsk   = (req, res, next)=> {
             "openId":"123",
             "checkStatus":5,
             "id":"a",
-            "course":"数据结构",
+            "status": ""
+,            "course":"数据结构",
             "index":"10:10-11:50"
         }
     ]

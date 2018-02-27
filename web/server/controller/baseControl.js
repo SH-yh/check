@@ -5,7 +5,7 @@ const tool = require("../third/tool");
 const fs = require('fs');
 const fetchOpenId = (JS_code, cb) =>{
     const APP_id = 'wxf9ad2b658a3cc649';
-    const SECRET = '88b42a53ded6de8ef266eaac7646fe22';
+    const SECRET = '4a951f7970b1d89dd9f7b02147d26ead';
     const hostname=`https://api.weixin.qq.com/sns/jscode2session?appid=${APP_id}&secret=${SECRET}&js_code=${JS_code}&grant_type=authoriz`;
     request(hostname, (error, response, body)=>{
         if (!error && response.statusCode == 200) {
